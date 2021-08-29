@@ -1,2 +1,3 @@
-# mrdiy
-MR DIY Project
+# ios-lexa
+
+Migrasi dari Template LobiMaster ke LEXA
