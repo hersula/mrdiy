@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="IE=10; IE=9; IE=8; IE=7; IE=EDGE" />
   <title>MR DIY System</title>
-  <link rel="shortcut icon" href="<?=base_url()?>assets/images/logo_rb_16.ico" />
+  <link rel="shortcut icon" href="<?=base_url()?>assets/images/mrdiy_logo.png" />
   
   <link href="<?=base_url()?>assets/css/bootstrap.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
   <link href="<?=base_url()?>assets/css/glyphicon.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -38,19 +38,19 @@
           <div class="navbar-brand-box">
             <a href="index.html" class="logo logo-dark">
               <span class="logo-sm">
-                <img src="assets/images/logo-pkbm-landscape.png" alt="" height="22">
+                <img src="assets/images/mrdiy-transparent.png" alt="" height="22">
               </span>
               <span class="logo-lg">
-                <img src="assets/images/logo-pkbm-landscape.png" alt="" height="17">
+                <img src="assets/images/mrdiy_logo.png" alt="" height="17">
               </span>
             </a>
             
             <a href="index.html" class="logo logo-light">
               <span class="logo-sm">
-                  <img src="<?=base_url('assets/images/logo_rb_sm.png') ?>">
+                  <img src="<?=base_url('assets/images/mr-diy-menu.png') ?>">
               </span>
               <span class="logo-lg">
-                  <img src="<?=base_url('assets/images/logo_rb_tras.png') ?>" height="50">
+                  <img src="<?=base_url('assets/images/mrdiy-transparent.png') ?>" height="50">
               </span>
             </a>
           </div>
@@ -62,43 +62,7 @@
 
         <div class="d-flex">
 
-        <?php if ($this->session->userdata('role_id') != 'B2B'): ?>
-        <div class="dropdown d-inline-block ml-1">
-          <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="ti-bell"></i>
-              <span class="badge badge-danger badge-pill"><?php echo $this->db->get_where('m_supplier_brand',array('status'=>3))->num_rows(); ?></span>
-          </button>
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-0" aria-labelledby="page-header-notifications-dropdown" style="">
-              <div class="p-3">
-                  <div class="row align-items-center">
-                      <div class="col">
-                          <h5 class="m-0"> Notifications (<?php echo $this->db->get_where('m_supplier_brand',array('status'=>3))->num_rows(); ?>) </h5>
-                      </div>
-                  </div>
-              </div>
-              <div data-simplebar="init" style="max-height: 230px;"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" style="height: auto; overflow: hidden;"><div class="simplebar-content" style="padding: 0px;">
-                  <?php foreach ($this->db->get_where('m_supplier_brand',array('status'=>3))->result() as $key => $value): ?>
-                    <div href="" class="text-reset notification-item">
-                      <div class="media">
-                          <div class="avatar-xs mr-3">
-                              <span class="avatar-title border-success rounded-circle ">
-                                  <i class="ti-bell"></i>
-                              </span>
-                          </div>
-                          <div class="media-body">
-                              <h6 class="mt-0 mb-1">Supplier <?php echo $this->db->get_where('m_supplier',array('supp_id'=>$value->supp_id))->row()->supp_name; ?></h6>
-                              <div class="text-muted">
-                                  <p class="mb-1">Ingin Menonaktifkan Brand <b><?php echo $this->db->get_where('m_brand',array('brand_id'=>$value->brand_id))->row()->brand_name; ?></b></p>
-                              </div>
-                              <button class="btn btn-outline-success waves-effect waves-light" onclick="confirmBrand('0','<?php echo $value->brand_id; ?>', '<?php echo $value->supp_id; ?>')">Setuju</button> <button class="btn btn-outline-warning waves-effect waves-light" onclick="confirmBrand('1','<?php echo $value->brand_id; ?>', '<?php echo $value->supp_id; ?>')">Tidak Setuju</button>
-                          </div>
-                      </div>
-                  </div>
-                  <?php endforeach ?>
-              </div></div></div></div><div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="transform: translate3d(0px, 0px, 0px); display: none; height: 128px;"></div></div></div>
-          </div>
-      </div>
-        <?php endif ?>
+        
         <div class="dropdown d-inline-block d-lg-none ml-2">
           <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-search-dropdown"
           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

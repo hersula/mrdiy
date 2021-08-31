@@ -6,10 +6,10 @@ class App_Model extends Core_Model {
 		  parent::__construct();
     }
 	
-	function getAllData() {
-		$Q = $this->db->query("SELECT * FROM m_buyer");
-		return $Q;
-	}
+	// function getAllData() {
+	// 	$Q = $this->db->query("SELECT * FROM m_buyer");
+	// 	return $Q;
+	// }
 	
 	function getMenu($role_id) {
 		$qry = $this->db->query("SELECT b.module_id, b.menu_id, b.menu_name, b.menu_desc, b.menu_icon, b.menu_ctl, b.menu_ctl_def,b.parent_menu_id,b.menu_id

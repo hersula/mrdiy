@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <title>IRBUS Online System</title>
-        <link rel="shortcut icon" href="<?=base_url()?>assets/images/logo_rb_16.ico" />
+        <title>MR DIY System</title>
+        <link rel="shortcut icon" href="<?=base_url()?>assets/images/logo.ico" />
 
         
         <link href="<?=base_url()?>assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -13,17 +13,21 @@
         <!-- App Css-->
         <link href="<?=base_url()?>assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
     </head>
-    <body style="background-image: url('<?=base_url()?>assets/images/body_bg.jpg'); background-size: 100% 100%;">
-    <div class="account-pages my-5 pt-sm-5">
-        <div class="container mt-5">
+    <div class="account-pages my-1 pt-sm-5">
+        <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-5">
-                    <?=$warning?>
+                    <!-- <?=$warning?> -->
+                    <!-- <div class="text-center">
+                    &nbsp;
+                    </div> -->
                     <div class="card overflow-hidden">
                         <div class="card-body pt-0">
-                            <h3 class="text-center mt-4">
-                               <div class="login-header" style="text-align: center;">IRBUS Online System</div>
-                            </h3>
+                        <div class="text-center">
+                            <img src="<?=base_url('assets/images/mrdiy_logo.png') ?>" height="100">
+                        </div>
+                                <h4 class="text-muted font-size-18 mb-1 text-center">MR.DIY</h4>
+                                <p class="text-muted text-center">Sign in to continue to system.</p>
                             <div class="p-3">
                                 <form class="lobi-form login-form visible" method="post" action="<?=base_url()?>auth/Login/DoLogin" enctype="multipart/form-data">
                                     <div class="form-group">
@@ -46,13 +50,18 @@
                                             <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Log In</button>
                                         </div>
                                     </div>
+                                    <div class="form-group mb-0 row">
+                                        <div class="col-12 mt-4">
+                                            <a href="pages-recoverpw.html" class="text-muted"><i class="mdi mdi-lock"></i> Forgot your password?</a>
+                                        </div>
+                                    </div>
                                    
                                 </form>
                             </div>
                         </div>
                     </div>
                     <div class="mt-3 text-center">
-                        <p style="color:white;">&copy; <?=date('Y')?> <i class="mdi mdi-heart text-danger"></i> by IT-APPDEV RIM </p>
+                        <p style="color:black;">&copy; <?=date('Y')?> <i class="mdi mdi-heart text-danger"></i> by PT PESONA SOLUSINDO </p>
                     </div>
                 </div>
             </div>
