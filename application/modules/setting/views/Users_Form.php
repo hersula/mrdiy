@@ -18,16 +18,16 @@
                <div class="row">
                   <div class="col-md-4">
                      <div class="form-group">
-                        <label>Employee *</label>
+                        <label>Name *</label>
                         <div class="input-group">
-                           <input type="hidden" name="employee_id" id="employee_id" value="" readonly="readonly" />
-                           <input type="text" class="form-control font-size-sm" placeholder="Employee" name="employee_name" id="employee_name" value="" readonly="readonly" />
-                           <div class="input-group-append">
+                           <!-- <input type="hidden" name="employee_id" id="employee_id" value="" readonly="readonly" /> -->
+                           <input type="text" class="form-control font-size-sm" placeholder="Name" name="name" id="name" value="" />
+                           <!-- <div class="input-group-append">
                               <button class="btn btn-outline-info btn-sm waves-effect waves-light" type="button"
                                  onclick="LOVKaryawan();"><i class="fas fa-search"></i></button>
                               <button class="btn btn-outline-warning btn-sm waves-effect waves-light" type="button"
                                  onclick="LOVKaryawanClear();"><i class="mdi mdi-close"></i></button>
-                           </div>
+                           </div> -->
                         </div>
                      </div>
                   </div>
@@ -64,7 +64,7 @@
                         </div>
                      </div>
                   </div>
-                  <div class="col-md-4">
+                  <!-- <div class="col-md-4">
                      <div class="form-group">
                         <label>Default Store *</label>
                         <div class="input-group">
@@ -78,7 +78,7 @@
                            </div>
                         </div>
                      </div>
-                  </div>
+                  </div> -->
                   <div class="col-md-12 mt-3">
                      <div class="form-group">
                         <label>Aktif</label><br />

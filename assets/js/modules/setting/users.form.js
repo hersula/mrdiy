@@ -9,13 +9,10 @@
 		.then((data) => {
 			if (data.result) {
 				let row = data.data;
-				$('#employee_id').val(row.employee_id); $('#employee_id').prop('readonly', true);
-				$('#employee_name').val(row.employee_name); $('#employee_name').prop('readonly', true);
 				$('#user_id').val(row.user_id); $('#user_id').prop('readonly', true);
 				$('#user_pass').val('');
 				$('#name').val(row.name);
 				$('#role_id').val(row.role_id); $('#role_name').val(row.role_name);
-				$('#def_store_id').val(row.def_store_id); $('#def_store_name').val(row.store_name);
 				$('#active').prop('checked', row.active == 1 ? true : false);
 			} else {
 				MsgBox.Notification(data.msg.toString(), 'bottom right', 'warning');
@@ -54,36 +51,7 @@
 		}
 	});*/
 	
-	// Typeahead untuk store
-	$('#store_name').typeahead(
-		{
-			hint: true,
-         highlight: true,
-			minLength: 1
-		},
-		{
-			displayKey: 'store_name',
-			//display: 'store_id',
-			highlight: true,
-			source: function (query, result) {
-				$.ajax({
-					url: base_url + Modules + '/' + Controller + '/getStoreListTypeHead/',
-					dataType: "json",
-					data: JSON.stringify({keyword: query}), 
-					type: "POST",
-					success: function (data) {
-						result($.map(data, function (item) {
-							return item;
-						}));
-					}
-				});
-			}
-		}
-	).bind('typeahead:selected', function(obj, selected, name) {
-		$('#store_id').val(selected.store_id);
-		$('#store_name').val(selected.store_name);
-		//return false;
-	}).off('blur');
+
 	
 })();
 
@@ -174,7 +142,7 @@ function Kembali() {
 }
 
 function Simpan() {
-	let list_input = ['role_id', 'role_name', 'def_store_id', 'def_store_name'];
+	let list_input = ['role_id', 'role_name'];
 	if (!$('#form_input').valid() || !ValidasiInput(list_input)) {
 		MsgBox.Notification('Periksa inputan anda.', 'bottom right', 'warning', 'mini');
 		return;
@@ -183,11 +151,11 @@ function Simpan() {
 	data2Send = JSON.stringify({
 		user_id: $('#user_id').val(),
 		user_pass: $('#user_pass').val(),
-		//name: $('#name').val(),
-		name: $('#employee_name').val(),
+		name: $('#name').val(),
+		// name: $('#employee_name').val(),
 		role_id: $('#role_id').val(),
-		def_store_id: $('#def_store_id').val(),
-		employee_id: $('#employee_id').val(),
+		// def_store_id: $('#def_store_id').val(),
+		// employee_id: $('#employee_id').val(),
 		active: $('#active').is(':checked')
 	});
 	
@@ -217,20 +185,20 @@ function Simpan() {
 	});
 }
 
-function LOVKaryawan() {
-	$('#PopUpModal').load(base_url + 'hc/karyawan/getKaryawanAll/', () => {
-		$('#ModalLOV').modal('show');
-		$(".modal-dialog").css({width: "800px"});
-		$('#list_cols').val(['employee_id','employee_name','jabatan_name','email','divisi_name','join_date']);
-		$('#list_controls').val(['#employee_id','#employee_name','#jabatan_name','#user_id','#divisi_name','#join_date']);
-	})
-}
+// function LOVKaryawan() {
+// 	$('#PopUpModal').load(base_url + 'hc/karyawan/getKaryawanAll/', () => {
+// 		$('#ModalLOV').modal('show');
+// 		$(".modal-dialog").css({width: "800px"});
+// 		$('#list_cols').val(['employee_id','employee_name','jabatan_name','email','divisi_name','join_date']);
+// 		$('#list_controls').val(['#employee_id','#employee_name','#jabatan_name','#user_id','#divisi_name','#join_date']);
+// 	})
+// }
 
-function LOVKaryawanClear() {
-	$('#employe_id').val(''); $('#employee_name').val('');
-	$('#jabatan_name').val(''); $('#user_id').val('');
-	$('#divisi_name').val(''); $('#join_date').val('');
-}
+// function LOVKaryawanClear() {
+// 	$('#employe_id').val(''); $('#employee_name').val('');
+// 	$('#jabatan_name').val(''); $('#user_id').val('');
+// 	$('#divisi_name').val(''); $('#join_date').val('');
+// }
 
 function LOVRole() {
 	$('#PopUpModal').load(base_url + Modules + '/' + Controller + '/getRole/', () => { // Ambil URL untuk membuka modal LOV
@@ -245,75 +213,75 @@ function LOVRoleClear() {
 	$('#role_id').val(''); $('#role_name').val('');
 }
 
-function LOVDefStore() {
-	$('#PopUpModal').load(base_url + Modules + '/' + Controller + '/getStore/', () => { // Ambil URL untuk membuka modal LOV
-		$('#ModalLOV').modal('show'); // Tampilkan modal LOV
-		$(".modal-dialog").css({width: "600px"}); // Lebar modal LOV
-		$('#list_cols').val(['store_id', 'store_name']);
-		$('#list_controls').val(['#def_store_id', '#def_store_name']);
-	});
-}
+// function LOVDefStore() {
+// 	$('#PopUpModal').load(base_url + Modules + '/' + Controller + '/getStore/', () => { // Ambil URL untuk membuka modal LOV
+// 		$('#ModalLOV').modal('show'); // Tampilkan modal LOV
+// 		$(".modal-dialog").css({width: "600px"}); // Lebar modal LOV
+// 		$('#list_cols').val(['store_id', 'store_name']);
+// 		$('#list_controls').val(['#def_store_id', '#def_store_name']);
+// 	});
+// }
 
-function LOVDefStoreClear() {
-	$('#def_store_id').val(''); $('#def_store_name').val('');
-}
+// function LOVDefStoreClear() {
+// 	$('#def_store_id').val(''); $('#def_store_name').val('');
+// }
 
-function refresh_store() {
-	DataTableStore.ajax.reload(null,true);
-}
+// function refresh_store() {
+// 	DataTableStore.ajax.reload(null,true);
+// }
 
-function add_store() {
-	let list_input = ['store_id', 'store_name'];
-	if (!ValidasiInput(list_input)) {
-		MsgBox.Notification('Pilih toko terlebih dahulu.', 'bottom right', 'warning', 'mini');
-		return;
-	}
+// function add_store() {
+// 	let list_input = ['store_id', 'store_name'];
+// 	if (!ValidasiInput(list_input)) {
+// 		MsgBox.Notification('Pilih toko terlebih dahulu.', 'bottom right', 'warning', 'mini');
+// 		return;
+// 	}
 	
-	data2Send = JSON.stringify({
-		store_id: $('#store_id').val(),
-		user_id: $('#user_id').val()
-	});
+// 	data2Send = JSON.stringify({
+// 		store_id: $('#store_id').val(),
+// 		user_id: $('#user_id').val()
+// 	});
 	
-	MsgBox.Confirm('Tambahkan toko ini?', 'Tambah akses toko').then(result => {
-		let url = base_url + Modules + '/' + Controller + '/addstore/';
-		FetchWithTimeout(url, data2Send, 'POST', 5000)
-		.then((data) => {
-			if (data.result) {
-				MsgBox.Notification(data.msg.toString(), 'bottom right', 'success');
-				$('#store_id').val(''); $('#store_name').val('');
-				data2Send = null;
-				refresh_store();
-			} else {
-				MsgBox.Notification(data.msg.toString(), 'bottom right', 'warning');
-			}
-		})
-		.catch((err) => {
-			MsgBox.Notification(err.toString(), 'bottom right', 'warning');
-		});
-	}).catch(err => {
-		console.log(err);
-	});
-}
+// 	MsgBox.Confirm('Tambahkan toko ini?', 'Tambah akses toko').then(result => {
+// 		let url = base_url + Modules + '/' + Controller + '/addstore/';
+// 		FetchWithTimeout(url, data2Send, 'POST', 5000)
+// 		.then((data) => {
+// 			if (data.result) {
+// 				MsgBox.Notification(data.msg.toString(), 'bottom right', 'success');
+// 				$('#store_id').val(''); $('#store_name').val('');
+// 				data2Send = null;
+// 				refresh_store();
+// 			} else {
+// 				MsgBox.Notification(data.msg.toString(), 'bottom right', 'warning');
+// 			}
+// 		})
+// 		.catch((err) => {
+// 			MsgBox.Notification(err.toString(), 'bottom right', 'warning');
+// 		});
+// 	}).catch(err => {
+// 		console.log(err);
+// 	});
+// }
 
-function delete_store(id = null, param = '') {
-	data2Send = JSON.stringify({
-		id: id
-	});
-	MsgBox.Confirm('Hapus akses toko ' + param + ' ?').then(result => {
-		FetchWithTimeout(base_url + Modules + '/' + Controller + '/deletestore/', data2Send, 'POST', 5000)
-		.then((data) => {
-			if (data.result) {
-				MsgBox.Notification(data.msg.toString(), 'bottom right', 'success');
-				data2Send = null;
-				refresh_store();
-			} else {
-				MsgBox.Notification(data.msg.toString(), 'bottom right', 'warning');
-			}
-		})
-		.catch((err) => {
-			MsgBox.Notification(err.toString(), 'bottom right', 'warning');
-		});
-	}).catch(err => {
-		console.log(err);
-	});
-}
+// function delete_store(id = null, param = '') {
+// 	data2Send = JSON.stringify({
+// 		id: id
+// 	});
+// 	MsgBox.Confirm('Hapus akses toko ' + param + ' ?').then(result => {
+// 		FetchWithTimeout(base_url + Modules + '/' + Controller + '/deletestore/', data2Send, 'POST', 5000)
+// 		.then((data) => {
+// 			if (data.result) {
+// 				MsgBox.Notification(data.msg.toString(), 'bottom right', 'success');
+// 				data2Send = null;
+// 				refresh_store();
+// 			} else {
+// 				MsgBox.Notification(data.msg.toString(), 'bottom right', 'warning');
+// 			}
+// 		})
+// 		.catch((err) => {
+// 			MsgBox.Notification(err.toString(), 'bottom right', 'warning');
+// 		});
+// 	}).catch(err => {
+// 		console.log(err);
+// 	});
+// }

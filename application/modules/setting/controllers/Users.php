@@ -188,7 +188,7 @@ class Users extends Core_Controller {
 		$data['columnDefs'] = array(
 			array('targets' => 0, 'orderable' => true, 'searchable' => true),
 			array('targets' => 1, 'orderable' => true, 'searchable' => true),
-			array('targets' => 3, 'orderable' => true, 'searchable' => true),
+			array('targets' => 2, 'orderable' => true, 'searchable' => true),
 		);
 		switch ($action) {
 			case 'nav':

@@ -103,7 +103,7 @@ class Approles_Model extends Core_Model {
    *******************************************************************************/
 	
   function getRoleList() {
-	$this->datatables->select('a.role_id,a.role_name');
+	$this->datatables->select('a.role_id,a.role_name,a.desc');
 	$this->datatables->from('app_roles a');
 	return $this->datatables->generate();
 }
