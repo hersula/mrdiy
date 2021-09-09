@@ -371,5 +371,17 @@
                 })();
             }
         })();
-    </script>
+    </script>    
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="page-title-box">
+            <h5>Dashboard</h5>
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a></li>
+                <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboard</a></li>
+                <li class="breadcrumb-item active">Selamat Datang</li>&nbsp;<b><?php echo $this->session->userdata('user_id'); ?></b>
+            </ol>
+        </div>
+    </div>
 </div>
