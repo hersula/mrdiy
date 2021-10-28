@@ -7,14 +7,14 @@ class Sales_Model extends Core_Model {
    }
 	
     function getSameStore() {
-        $this->datatables->select("deskripsi, CAST(today AS decimal(18,2)) AS today, CAST(lw AS decimal(18,2)) as lw, plw, CAST(mtd AS decimal(18,2)) as mtd, CAST(lm AS decimal(18,2)) as lm, plm, CAST(ly AS decimal(18,2)) as ly, ply");
+        $this->datatables->select("deskripsi, CAST(today AS money) AS today, CAST(lw AS money) as lw, plw, CAST(mtd AS decimal(18,2)) as mtd, CAST(lm AS decimal(18,2)) as lm, plm, CAST(ly AS decimal(18,2)) as ly, ply");
         $this->datatables->from('r_sales');
         
         return $this->datatables->generate();
     }
 
     function getAllStore() {
-        $this->datatables->select("deskripsi, CAST(today AS decimal(18,2)) AS today, CAST(lw AS decimal(18,2)) as lw, plw, CAST(mtd AS decimal(18,2)) as mtd, CAST(lm AS decimal(18,2)) as lm, plm, CAST(ly AS decimal(18,2)) as ly, ply");
+        $this->datatables->select("deskripsi, CAST(today AS money) AS today, CAST(lw AS decimal(18,2)) as lw, plw, CAST(mtd AS decimal(18,2)) as mtd, CAST(lm AS decimal(18,2)) as lm, plm, CAST(ly AS decimal(18,2)) as ly, ply");
         $this->datatables->from('r_sales_all');
         
         return $this->datatables->generate();
