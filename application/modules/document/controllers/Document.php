@@ -1,10 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Sales extends Core_Controller {
+class Document extends Core_Controller {
 
 	function __construct(){
-		parent::__construct("sales"); # parsing menu_id
-		$this->load->model("Sales_Model", "m_app");
+		parent::__construct("document"); # parsing menu_id
+		$this->load->model("Document_Model", "m_app");
 	}
 
 	/*******************************************************************************
@@ -13,60 +13,31 @@ class Sales extends Core_Controller {
 
   	function index() {
 		//$this->data['action'] = 'create';
-	
-		$this->load->view('Sales', $this->data);
+		$this->load->view('Document', $this->data);
 	  }
 	  
 	function create() {
-		$this->load->view('Sales_Form', $this->data);
+		$this->load->view('Document_Form', $this->data);
 	}
 
-	function getSameStore() {	
+	function getList() {
+		$filter = array(
+			'a.active' => $this->input->post("active", TRUE),
+			#'a.employee_status' => $this->input->post("employee_status", TRUE),
+		);
+	
 		$this->output->set_content_type('application/json');
-		echo $this->m_app->getSameStore();				
-	}
-
-	function getAllStore() {
-		$this->output->set_content_type('application/json');
-		echo $this->m_app->getAllStore();
-	}
-
-	function getFsStore() {
-		$this->output->set_content_type('application/json');
-		echo $this->m_app->getFsStore();
-	}
-
-	function getMallStore() {
-		$this->output->set_content_type('application/json');
-		echo $this->m_app->getMallStore();
-	}
-
-	function getJavaStore() {
-		$this->output->set_content_type('application/json');
-		echo $this->m_app->getJavaStore();
-	}
-
-	function getNonStore() {
-		$this->output->set_content_type('application/json');
-		echo $this->m_app->getNonStore();
+		echo $this->m_app->getList($filter);
 	}
 
 	function save($format = 'json') {
 		$input = $this->input->post();
         $data2send = json_decode($input['data2Send']);
-		$nis = $this->session->userdata('user_id');
 		
-		$kd_site = $data2send->kd_site;
-		$kd_type = $data2send->kd_type;
-		$kd_category = $data2send->kd_category;
-		$kd_progres = $data2send->kd_progres;
-		$kd_priority = $data2send->kd_priority;
-		$kd_store = $data2send->kd_store;
-		$user_id = $this->session->userdata('user_id');
-		$subject = $data2send->subject;
-		$pesan = $data2send->pesan;
+		$judul = $data2send->judul;
+		$description = $data2send->description;
 
-		$data_upload = uploadDataImg('lampiran', $subject.'_lampiran'.'_'.date('d-m-Y'), './assets/data_upload');
+		$data_upload = uploadDataImg('lampiran', $judul.'_'.date('d-m-Y'), './assets/data_upload/dokumen');
 
 		if (!empty($_FILES)) {
 			if ($input != NULL || trim($input) == '' || !empty($input)) {				

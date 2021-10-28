@@ -69,7 +69,6 @@ class Ticket_Model extends Core_Model {
 			'kd_type' => $data2send->kd_type,
 			'kd_category' => $data2send->kd_category,
 			'kd_progres' => $data2send->kd_progres,
-			'kd_priority' => $data2send->kd_priority,
 			'kd_store' => $data2send->kd_store,
 			'user_id' => $this->session->userdata('user_id'),
 			'subject' => $data2send->subject,

@@ -1,6 +1,6 @@
 <?php if (! defined('BASEPATH')) {exit('No direct script access allowed');}
 
-class Ticket_Model extends Core_Model {
+class Document_Model extends Core_Model {
 	
 	function __construct(){
         parent::__construct();
@@ -9,50 +9,6 @@ class Ticket_Model extends Core_Model {
 	/*******************************************************************************
    *                            START DEFAULT FUNCTION                            *
    *******************************************************************************/
-  public function generate_trans_number($kd_site)
-  {
-	  /**
-	   * Format penomoran dokumen
-	   * Contoh Penomoran :
-	   * POSW00012104001
-	   *
-	   * Penjelasan :
-	   * TC = Kode penerimaan
-	   * SW0001 = Pemisah
-	   * 21 = 2 digit tahun
-	   * 04 = 2 digit bulan
-	   * 001 = 3 digit running number
-	   *
-	   * Status dokumen :
-	   * 0 = Baru
-	   * 1 = Proses
-	   * 2 = Selesai
-	   * 9 = Batal
-	   */
-	  # Definisikan kebutuhan prefix
-	  $max_length_pad_string = 3;
-	  $prefix = $this->trans_code;
-	  $year = date('y', strtotime($tgl_trans));
-	  $month = date('m', strtotime($tgl_trans));
-	  $prefix_full = $prefix . $kd_site;
-	  # Get last number
-	  $this->db->select("MAX(no_doc) AS code");
-	  $this->db->from("t_ticket");
-	  $this->db->where([
-		  "kd_site" => $kd_site,
-	  ]);
-	  $get_last_number = $this->db->get()->row_array();
-	  # Jika nomor sudah ada tambahkan 1, jika tidak ada kembali ke 1
-	  if ($get_last_number != null) {
-		  $running_no = (int) substr($get_last_number['code'], strlen($prefix_full), $max_length_pad_string) + 1;
-	  } else {
-		  $running_no = 1;
-	  }
-	  $doc_no = $prefix_full . str_pad($running_no, $max_length_pad_string, "0", STR_PAD_LEFT);
-
-	  return $doc_no;
-  }
-
 	function save($input) {
 		// $no_doc = $this->generate_trans_number($input['kd_store']);
 		// $no_doc = "00001";
@@ -65,15 +21,8 @@ class Ticket_Model extends Core_Model {
 		$data2send = json_decode($data_input->data2Send);
 		$data = array(
 			// 'no_doc' => $no_doc,
-			'kd_site' => $data2send->kd_site,
-			'kd_type' => $data2send->kd_type,
-			'kd_category' => $data2send->kd_category,
-			'kd_progres' => $data2send->kd_progres,
-			'kd_priority' => $data2send->kd_priority,
-			'kd_store' => $data2send->kd_store,
-			'user_id' => $this->session->userdata('user_id'),
-			'subject' => $data2send->subject,
-			'pesan' => $data2send->pesan,			
+			'judul' => $data2send->judul,
+			'description' => $data2send->description,
 			'created_by' => $this->session->userdata('user_id'),
 			'creation_date' => date('Y-m-d H:i:s')
 		);
@@ -81,7 +30,7 @@ class Ticket_Model extends Core_Model {
 		if (!empty($_FILES['lampiran'])) {
 			$data['lampiran'] = $data_input->lampiran;
 		}
-		$NonQry = $this->db->insert('t_ticket', $data);
+		$NonQry = $this->db->insert('libdoc', $data);
 		
 		if (!$NonQry && !empty($this->db->error())) {
 			$msg_err = $this->db->error();
@@ -146,16 +95,8 @@ class Ticket_Model extends Core_Model {
 	}
 	
 	function getList($filter) {
-		$this->datatables->select("a.id, a.no_doc, a.creation_date, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, g.m_shortdesc, h.name, a.subject");
-	 		$this->datatables->from('t_ticket a');
-	 		$this->datatables->join('m_site b', 'b.kd_site=a.kd_site', 'left');
-			$this->datatables->join('m_type c', 'c.kd_type=a.kd_type', 'left');
-			$this->datatables->join('m_category d', 'd.kd_category = a.kd_category', 'left');
-			$this->datatables->join('m_priority e', 'e.kd_priority = a.kd_priority', 'left');
-			$this->datatables->join('m_progres f', 'f.kd_progres = a.kd_progres', 'left');
-			$this->datatables->join('m_customer g', 'g.m_code = a.kd_store', 'left');
-			$this->datatables->join('app_users h', 'h.user_id = a.user_id', 'left');
-
+		$this->datatables->select("a.id, a.judul, a.lampiran, a.created_by, a.creation_date");
+	 		$this->datatables->from('libdoc a');
 		
 		foreach($filter as $key => $val) {
 			if (trim($val) != "" || !empty($val) || $val != NULL) {

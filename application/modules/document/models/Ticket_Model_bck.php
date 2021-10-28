@@ -9,7 +9,7 @@ class Ticket_Model extends Core_Model {
 	/*******************************************************************************
    *                            START DEFAULT FUNCTION                            *
    *******************************************************************************/
-  public function generate_trans_number($kd_site)
+  public function generate_trans_number($tgl_trans, $kd_store)
   {
 	  /**
 	   * Format penomoran dokumen
@@ -34,12 +34,14 @@ class Ticket_Model extends Core_Model {
 	  $prefix = $this->trans_code;
 	  $year = date('y', strtotime($tgl_trans));
 	  $month = date('m', strtotime($tgl_trans));
-	  $prefix_full = $prefix . $kd_site;
+	  $prefix_full = $prefix . $kd_store . $year . $month;
 	  # Get last number
 	  $this->db->select("MAX(no_doc) AS code");
 	  $this->db->from("t_ticket");
 	  $this->db->where([
-		  "kd_site" => $kd_site,
+		  "YEAR(tgl_trans)" => date('Y', strtotime($tgl_trans)),
+		  "MONTH(tgl_trans)" => $month,
+		  "kd_store" => $kd_store,
 	  ]);
 	  $get_last_number = $this->db->get()->row_array();
 	  # Jika nomor sudah ada tambahkan 1, jika tidak ada kembali ke 1
@@ -54,33 +56,29 @@ class Ticket_Model extends Core_Model {
   }
 
 	function save($input) {
-		// $no_doc = $this->generate_trans_number($input['kd_store']);
-		// $no_doc = "00001";
+		$no_doc = $this->generate_trans_number(date_convert_format($input['doc_date']), $input['kd_store']);
+
 		// $cek = $this->db->query("SELECT * FROM t_ticket WHERE no_doc=?", array($input['no_doc']));
 		// if ($cek->row() != NULL) {
 		// 	return array('result' => false, 'data' => NULL, 'msg' => 'Karyawan ID sudah ada.');
 		// }
 
-		$data_input = (object) $input;
-		$data2send = json_decode($data_input->data2Send);
 		$data = array(
-			// 'no_doc' => $no_doc,
-			'kd_site' => $data2send->kd_site,
-			'kd_type' => $data2send->kd_type,
-			'kd_category' => $data2send->kd_category,
-			'kd_progres' => $data2send->kd_progres,
-			'kd_priority' => $data2send->kd_priority,
-			'kd_store' => $data2send->kd_store,
-			'user_id' => $this->session->userdata('user_id'),
-			'subject' => $data2send->subject,
-			'pesan' => $data2send->pesan,			
+			'no_doc' => $no_doc,
+			'tgl_trans' => date_convert_format($input['doc_date']),
+			'kd_site' => $input['kd_site'],
+			'kd_type' => $input['kd_type'],
+			'kd_category' => $input['kd_category'],
+			'kd_priority' => $input['kd_priority'],
+			'kd_progres' => $input['kd_progres'],
+			'kd_store' => $input['kd_store'],
+			'user_id' => $input['user_id'],
+			'subject' => $input['subject'],
+			'pesan' => $input['pesan'],
 			'created_by' => $this->session->userdata('user_id'),
 			'creation_date' => date('Y-m-d H:i:s')
 		);
-
-		if (!empty($_FILES['lampiran'])) {
-			$data['lampiran'] = $data_input->lampiran;
-		}
+		
 		$NonQry = $this->db->insert('t_ticket', $data);
 		
 		if (!$NonQry && !empty($this->db->error())) {
@@ -88,7 +86,7 @@ class Ticket_Model extends Core_Model {
 			$msg = explode(':',$msg_err['message']);
 			return array('result' => false, 'data' => NULL, 'msg' => 'Gagal input. '.$msg[0].': '.$msg[1].', nilai : '.str_replace('LINE 1','',$msg[2]));
 		} else {
-			return array('result' => true, 'data' => NULL, 'msg' => 'Data berhasil disimpan.');
+			return array('result' => true, 'data' => ['dok_no' => $no_doc], 'message' => 'Data berhasil disimpan.');
 		}
 	}
 	
@@ -100,7 +98,7 @@ class Ticket_Model extends Core_Model {
 			'modification_date' => date('Y-m-d H:i:s')
 		);
 		
-		$this->db->where('subject', $input['subject']);
+		$this->db->where('doc_no', $input['doc_no']);
 		$NonQry = $this->db->update('t_ticket', $data);
 		
 		if (!$NonQry && !empty($this->db->error())) {
@@ -127,14 +125,14 @@ class Ticket_Model extends Core_Model {
 	
 	function getData2Edit($id) {
 		$Qry = $this->db->query("SELECT a.id,a.no_doc,a.kd_site,b.nm_site,a.kd_type,c.nm_type,a.kd_category,d.nm_category,a.kd_priority,e.nm_priority,a.kd_progres,f.nm_progres,
-		a.kd_store,g.m_shortdesc,a.user_id,h.name,a.subject,a.pesan
+		a.kd_store,g.nm_store,a.user_id,h.name,a.tgl_trans,a.subject,a.pesan
 		FROM t_ticket a
 		LEFT JOIN m_site b ON b.kd_site = a.kd_site
 		LEFT JOIN m_type c ON c.kd_type = a.kd_type
 		LEFT JOIN m_category d ON d.kd_category = a.kd_category
 		LEFT JOIN m_priority e ON e.kd_priority = a.kd_priority
 		LEFT JOIN m_progres f ON f.kd_progres = a.kd_progres
-		LEFT JOIN m_customer g ON g.m_code = a.kd_store
+		LEFT JOIN m_store g ON g.kd_store = a.kd_store
 		LEFT JOIN app_users h ON h.user_id = a.user_id
 		WHERE a.id=?", array($id));
 													
@@ -146,14 +144,14 @@ class Ticket_Model extends Core_Model {
 	}
 	
 	function getList($filter) {
-		$this->datatables->select("a.id, a.no_doc, a.creation_date, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, g.m_shortdesc, h.name, a.subject");
+		$this->datatables->select("a.id, a.no_doc, a.tgl_trans, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, g.nm_store, h.name, a.subject");
 	 		$this->datatables->from('t_ticket a');
 	 		$this->datatables->join('m_site b', 'b.kd_site=a.kd_site', 'left');
-			$this->datatables->join('m_type c', 'c.kd_type=a.kd_type', 'left');
+			$this->datatables->join('m_type c', 'c.kd_site=a.kd_site', 'left');
 			$this->datatables->join('m_category d', 'd.kd_category = a.kd_category', 'left');
-			$this->datatables->join('m_priority e', 'e.kd_priority = a.kd_priority', 'left');
+			$this->datatables->join('m_priority e', 'e.kd_category = a.kd_category', 'left');
 			$this->datatables->join('m_progres f', 'f.kd_progres = a.kd_progres', 'left');
-			$this->datatables->join('m_customer g', 'g.m_code = a.kd_store', 'left');
+			$this->datatables->join('m_store g', 'g.kd_store = a.kd_store', 'left');
 			$this->datatables->join('app_users h', 'h.user_id = a.user_id', 'left');
 
 		

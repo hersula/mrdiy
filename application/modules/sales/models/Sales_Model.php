@@ -6,9 +6,44 @@ class Sales_Model extends Core_Model {
         parent::__construct();
    }
 	
-    function getList() {
-        $this->datatables->select("deskripsi, today, lw, plw, mtd, lm, plm, ly, ply");
+    function getSameStore() {
+        $this->datatables->select("deskripsi, CAST(today AS decimal(18,2)) AS today, CAST(lw AS decimal(18,2)) as lw, plw, CAST(mtd AS decimal(18,2)) as mtd, CAST(lm AS decimal(18,2)) as lm, plm, CAST(ly AS decimal(18,2)) as ly, ply");
         $this->datatables->from('r_sales');
+        
+        return $this->datatables->generate();
+    }
+
+    function getAllStore() {
+        $this->datatables->select("deskripsi, CAST(today AS decimal(18,2)) AS today, CAST(lw AS decimal(18,2)) as lw, plw, CAST(mtd AS decimal(18,2)) as mtd, CAST(lm AS decimal(18,2)) as lm, plm, CAST(ly AS decimal(18,2)) as ly, ply");
+        $this->datatables->from('r_sales_all');
+        
+        return $this->datatables->generate();
+    }
+
+    function getFsStore() {
+        $this->datatables->select("deskripsi, CAST(today AS decimal(18,2)) AS today, CAST(lw AS decimal(18,2)) as lw, plw, CAST(mtd AS decimal(18,2)) as mtd, CAST(lm AS decimal(18,2)) as lm, plm, CAST(ly AS decimal(18,2)) as ly, ply");
+        $this->datatables->from('r_sales_fs');
+        
+        return $this->datatables->generate();
+    }
+
+    function getMallStore() {
+        $this->datatables->select("deskripsi, CAST(today AS decimal(18,2)) AS today, CAST(lw AS decimal(18,2)) as lw, plw, CAST(mtd AS decimal(18,2)) as mtd, CAST(lm AS decimal(18,2)) as lm, plm, CAST(ly AS decimal(18,2)) as ly, ply");
+        $this->datatables->from('r_sales_mall');
+        
+        return $this->datatables->generate();
+    }
+
+    function getJavaStore() {
+        $this->datatables->select("deskripsi, CAST(today AS decimal(18,2)) AS today, CAST(lw AS decimal(18,2)) as lw, plw, CAST(mtd AS decimal(18,2)) as mtd, CAST(lm AS decimal(18,2)) as lm, plm, CAST(ly AS decimal(18,2)) as ly, ply");
+        $this->datatables->from('r_sales_java');
+        
+        return $this->datatables->generate();
+    }
+
+    function getNonStore() {
+        $this->datatables->select("deskripsi, CAST(today AS decimal(18,2)) AS today, CAST(lw AS decimal(18,2)) as lw, plw, CAST(mtd AS decimal(18,2)) as mtd, CAST(lm AS decimal(18,2)) as lm, plm, CAST(ly AS decimal(18,2)) as ly, ply");
+        $this->datatables->from('r_sales_nonjava');
         
         return $this->datatables->generate();
     }

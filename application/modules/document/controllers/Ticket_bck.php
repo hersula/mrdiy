@@ -1,10 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Sales extends Core_Controller {
+class Ticket extends Core_Controller {
 
 	function __construct(){
-		parent::__construct("sales"); # parsing menu_id
-		$this->load->model("Sales_Model", "m_app");
+		parent::__construct("ticket"); # parsing menu_id
+		$this->load->model("Ticket_Model", "m_app");
 	}
 
 	/*******************************************************************************
@@ -13,83 +13,35 @@ class Sales extends Core_Controller {
 
   	function index() {
 		//$this->data['action'] = 'create';
-	
-		$this->load->view('Sales', $this->data);
+		$this->load->view('Ticket', $this->data);
 	  }
 	  
 	function create() {
-		$this->load->view('Sales_Form', $this->data);
+		$this->load->view('Ticket_Form', $this->data);
 	}
 
-	function getSameStore() {	
+	function getList() {
+		$filter = array(
+			'a.active' => $this->input->post("active", TRUE),
+			#'a.employee_status' => $this->input->post("employee_status", TRUE),
+		);
+	
 		$this->output->set_content_type('application/json');
-		echo $this->m_app->getSameStore();				
-	}
-
-	function getAllStore() {
-		$this->output->set_content_type('application/json');
-		echo $this->m_app->getAllStore();
-	}
-
-	function getFsStore() {
-		$this->output->set_content_type('application/json');
-		echo $this->m_app->getFsStore();
-	}
-
-	function getMallStore() {
-		$this->output->set_content_type('application/json');
-		echo $this->m_app->getMallStore();
-	}
-
-	function getJavaStore() {
-		$this->output->set_content_type('application/json');
-		echo $this->m_app->getJavaStore();
-	}
-
-	function getNonStore() {
-		$this->output->set_content_type('application/json');
-		echo $this->m_app->getNonStore();
+		echo $this->m_app->getList($filter);
 	}
 
 	function save($format = 'json') {
-		$input = $this->input->post();
-        $data2send = json_decode($input['data2Send']);
-		$nis = $this->session->userdata('user_id');
-		
-		$kd_site = $data2send->kd_site;
-		$kd_type = $data2send->kd_type;
-		$kd_category = $data2send->kd_category;
-		$kd_progres = $data2send->kd_progres;
-		$kd_priority = $data2send->kd_priority;
-		$kd_store = $data2send->kd_store;
-		$user_id = $this->session->userdata('user_id');
-		$subject = $data2send->subject;
-		$pesan = $data2send->pesan;
-
-		$data_upload = uploadDataImg('lampiran', $subject.'_lampiran'.'_'.date('d-m-Y'), './assets/data_upload');
-
-		if (!empty($_FILES)) {
-			if ($input != NULL || trim($input) == '' || !empty($input)) {				
-				if ($data_upload['upload_status'] == true) {
-					$input['lampiran'] = ($data_upload['upload_status'] != false) ? $data_upload['upload_data']['file_name'] : null;
-				}
-				
-				$hasil = $this->m_app->save($input);
-				echo $this->output($format, $hasil);
-			} else {
-				$hasil = array('result' => false, 'msg' => 'Data kosong.', 'data' => NULL);
-				echo $this->output($format, $hasil);
-			}
-			
+		# START Check input, jika tidak ada input atau kosong maka tidak di lanjutkan
+		$raw = $this->security->xss_clean($this->input->raw_input_stream);
+		$input = $this->input($format, $raw);
+	
+		if ($input != NULL || trim($input) == '' || !empty($input)) {
+			$hasil = $this->m_app->save($input);
 		} else {
-			if ($input != NULL || trim($input) == '' || !empty($input)) {
-				$hasil = $this->m_app->save($input);
-				echo $this->output($format, $hasil);
-			} else {
-				$hasil = array('result' => false, 'msg' => 'Data kosong.', 'data' => NULL);
-				echo $this->output($format, $hasil);
-			}
+			$hasil = array('result' => false, 'msg' => 'Data kosong.', 'data' => NULL);
 		}
+	
+		echo $this->output($format, $hasil);
 	}
 
 	function getData2Edit($format = 'json', $id = NULL) {

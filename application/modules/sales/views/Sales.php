@@ -10,7 +10,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-4">
         <div class="card mini-stat bg-info">
             <div class="card-body mini-stat-img">
@@ -54,7 +54,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
@@ -99,6 +99,146 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">All Stores</h4>
+                <table id="table_all_data" class="table table-striped table-bordered dt-responsive wrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Deskripsi</th>
+                            <th>Today</th>
+                            <th>lw</th>
+                            <th>lw(%)</th>
+                            <th>mtd</th>
+                            <th>lm</th>
+                            <th>lm(%)</th>
+                            <th>ly</th>
+                            <th>ly(%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
+                <!-- <div id="morris-area-example" class="morris-charts morris-charts-height" dir="ltr"></div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">Freestanding</h4>
+                <table id="table_fs_data" class="table table-striped table-bordered dt-responsive wrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Deskripsi</th>
+                            <th>Today</th>
+                            <th>lw</th>
+                            <th>lw(%)</th>
+                            <th>mtd</th>
+                            <th>lm</th>
+                            <th>lm(%)</th>
+                            <th>ly</th>
+                            <th>ly(%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
+                <!-- <div id="morris-area-example" class="morris-charts morris-charts-height" dir="ltr"></div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">MALL</h4>
+                <table id="table_mall_data" class="table table-striped table-bordered dt-responsive wrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Deskripsi</th>
+                            <th>Today</th>
+                            <th>lw</th>
+                            <th>lw(%)</th>
+                            <th>mtd</th>
+                            <th>lm</th>
+                            <th>lm(%)</th>
+                            <th>ly</th>
+                            <th>ly(%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
+                <!-- <div id="morris-area-example" class="morris-charts morris-charts-height" dir="ltr"></div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">JAVA</h4>
+                <table id="table_java_data" class="table table-striped table-bordered dt-responsive wrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Deskripsi</th>
+                            <th>Today</th>
+                            <th>lw</th>
+                            <th>lw(%)</th>
+                            <th>mtd</th>
+                            <th>lm</th>
+                            <th>lm(%)</th>
+                            <th>ly</th>
+                            <th>ly(%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
+                <!-- <div id="morris-area-example" class="morris-charts morris-charts-height" dir="ltr"></div> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4">NON JAVA</h4>
+                <table id="table_non_data" class="table table-striped table-bordered dt-responsive wrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Deskripsi</th>
+                            <th>Today</th>
+                            <th>lw</th>
+                            <th>lw(%)</th>
+                            <th>mtd</th>
+                            <th>lm</th>
+                            <th>lm(%)</th>
+                            <th>ly</th>
+                            <th>ly(%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
+                <!-- <div id="morris-area-example" class="morris-charts morris-charts-height" dir="ltr"></div> -->
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script type="text/javascript">
@@ -109,6 +249,11 @@
    var data2Send = null;
    var dataArr = [];
    var DataTable = null;
+   var DataAll = null;
+   var DataFs = null;
+   var DataMall = null;
+   var DataJava = null;
+   var DataNon = null;
    // END VARIABEL WAJIB
    var action = '<?=$action?>';
    var idData = null;
