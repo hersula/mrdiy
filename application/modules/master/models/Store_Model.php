@@ -45,14 +45,15 @@ class Store_Model extends Core_Model {
 	function save($input) {
 		
 		$data = array(
-			'kd_store' => $input['kd_store'],
-			'nm_store' => $input['nm_store'],
-			'status' => $input['status'],
-			'created_by' => $this->session->userdata('user_id'),
-			'creation_date' => date('Y-m-d H:i:s')
+			'm_code' => $input['kd_store'],
+			'm_shortdesc' => $input['nm_store'],
+			'm_type' => $input['m_type'],
+			'm_island' => $input['m_island'],
+			'sqm' => $input['sqm'],
+			'status' => $input['status']
       );
 		
-		$NonQry = $this->db->insert('m_store', $data);
+		$NonQry = $this->db->insert('m_customer', $data);
 		
 		if (!$NonQry && !empty($this->db->error())) {
 			$msg_err = $this->db->error();
@@ -65,15 +66,16 @@ class Store_Model extends Core_Model {
 	
 	function update($input) {
 		$data = array(
-			'kd_store' => $input['kd_store'],
-			'nm_store' => $input['nm_store'],
-			'status' => $input['status'],
-			'modified_by' => $this->session->userdata('user_id'),
-			'modification_date' => date('Y-m-d H:i:s')
+			// 'm_code' => $input['kd_store'],
+			// 'm_shortdesc' => $input['nm_store'],
+			'm_type' => $input['m_type'],
+			'm_island' => $input['m_island'],
+			'sqm' => $input['sqm'],
+			'status' => $input['status']
 		);
 		
 		$this->db->where('id', $input['id']);
-		$NonQry = $this->db->update('m_store', $data);
+		$NonQry = $this->db->update('m_customer', $data);
 		
 		if (!$NonQry && !empty($this->db->error())) {
 			$msg_err = $this->db->error();
@@ -86,7 +88,7 @@ class Store_Model extends Core_Model {
 
 	function delete($input) {
 		$this->db->where_in('id', $input['id']);
-		$NonQry = $this->db->delete("m_store");
+		$NonQry = $this->db->delete("m_customer");
 		
 		if (!$NonQry && !empty($this->db->error())) {
 			$msg_err = $this->db->error();
@@ -98,8 +100,8 @@ class Store_Model extends Core_Model {
 	}
 	
 	function getData2Edit($id) {
-		$Qry = $this->db->query("SELECT a.id, a.kd_store, a.nm_store, a.status 
-										FROM m_store a 
+		$Qry = $this->db->query("SELECT a.id, a.m_code, a.m_shortdesc, a.m_type, a.m_island, a.sqm, a.status 
+										FROM m_customer a 
 										WHERE a.id=?", array($id));
 													
 		if ($Qry->result() != NULL){
@@ -110,8 +112,8 @@ class Store_Model extends Core_Model {
 	}
 	
 	function getList($filter) {
-		$this->datatables->select('a.id, a.kd_store, a.nm_store, a.status');
-      $this->datatables->from('m_store a');
+		$this->datatables->select('a.id, a.m_code, a.m_shortdesc, a.m_type, a.m_island, a.sqm, a.status');
+      $this->datatables->from('m_customer a');
 		foreach($filter as $key => $val) {
 			if (trim($val) != "" || !empty($val) || $val != NULL) {
 				$this->datatables->where($key, $val);
@@ -121,8 +123,8 @@ class Store_Model extends Core_Model {
 	}
 	
 	function getDataList($filter) {
-		$this->db->select("a.kd_store, a.nm_store, CASE WHEN a.status=1 THEN 'Aktif' ELSE 'Tidak Aktif' END AS status");
-      $this->db->from('m_store a');
+		$this->db->select("a.m_code, a.m_shortdesc, a.m_type, a.m_island, a.sqm, CASE WHEN a.status=1 THEN 'Aktif' ELSE 'Tidak Aktif' END AS status");
+      $this->db->from('m_customer a');
 		foreach($filter as $key => $val) {
 			if (trim($val) != "" || !empty($val) || $val != NULL) {
 				$this->db->where($key, $val);
@@ -136,19 +138,19 @@ class Store_Model extends Core_Model {
    *******************************************************************************/
 	
   	function getStoreList() {
-		$this->datatables->select('a.kd_store, a.nm_store');
-		$this->datatables->from('m_store a');
+		$this->datatables->select('a.m_code, a.m_shortdesc');
+		$this->datatables->from('m_customer a');
 		return $this->datatables->generate();
 	}
 
 	function getStoreSelect2($input) {
-		$Qry = $this->db->query("SELECT kd_store, nm_store FROM m_store WHERE kd_store ILIKE ? OR nm_store ILIKE ?", 
+		$Qry = $this->db->query("SELECT m_code, m_shortdesc FROM m_customer WHERE m_code ILIKE ? OR m_shortdesc ILIKE ?", 
 									   array('%'.$input['keyword'].'%', '%'.$input['keyword'].'%'));
 		return $Qry->result();
 	}
 
 	function getStore() {
-		$Qry = $this->db->query("SELECT a.id, a.kd_store, a.nm_store, a.status FROM m_store a");
+		$Qry = $this->db->query("SELECT a.id, a.m_code, a.m_shortdesc, a.status FROM m_customer a");
 		return $Qry->result();
 	}
 

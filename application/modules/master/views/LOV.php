@@ -8,11 +8,11 @@
 		<h4 class="modal-title"><?=$Judul?></h4>
       </div>
       <div class="modal-body">
-        <div class="row font-size-sm">
+        <div class="row">
           <div class="col-md-12">
             <!-- PAGE CONTENT BEGINS -->
             <br />
-            <table id="table_data_lov" name="table_data_lov" class="display compact nowrap table table-striped table-bordered table-hover" cellspacing="0" width="100%">
+            <table id="table_data_lov" name="table_data_lov" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
                <thead>
 	               <!--<th class="text-center">Pilih</th>-->
                </thead>
@@ -65,7 +65,7 @@
 	 
 	function iniDataTable() {
 		// Tambahkan kolom untuk pilih data
-		DT_columns.push({"data": "action", "width": 40, "className": "text-center"});
+		DT_columns.push({"data": null, "width": 40, "className": "text-center"});
 		// Tambahkan column defs untuk pilih data
 		DT_columnDefs.push({
 			"targets": -1,
@@ -122,12 +122,15 @@
 	}
 	
 	LobiAdmin.loadScript([
-		'<?=base_url()?>assets/theme/js/plugin/highlight/highlight.pack.js',
-		'<?=base_url()?>assets/theme/js/plugin/datatables/jquery.dataTables.min.js',
+
+        '<?=base_url()?>assets/js/plugin/highlight/highlight.pack.js',
+		'<?=base_url()?>assets/libs/datatables.net/js/jquery.dataTables.min.js',
 	], function(){
 			LobiAdmin.loadScript([
-				'<?=base_url()?>assets/theme/js/plugin/datatables/dataTables.bootstrap.min.js',
-				'<?=base_url()?>assets/theme/js/plugin/datatables/dataTables.responsive.min.js',
+                '<?=base_url()?>assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js',
+                '<?=base_url()?>assets/js/plugin/datatables/dataTables.responsive.min.js',
+                '<?=base_url()?>assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js',
+				'<?=base_url()?>assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js',
 			], initPage);
 	});
 	

@@ -36,36 +36,24 @@ function initPage(){
 			},
 		},
 		"columns": [
-			// {"data": "id", "width": 30},
+			{"data": "id", "width": 30},
 			{"data": "no_doc", "width" : 50},
-			{"data": "tgl_trans"},
+			{"data": "creation_date"},
 			{"data": "nm_site", "width": 50},
 			{"data": "nm_type", "width": 50},
 			{"data": "nm_category", "width": 50},			
 			{"data": "nm_priority", "width": 50},
 			{"data": "nm_progres", "width": 40, "className": "text-center"},
-			{"data": "nm_store", "width": 100},
+			{"data": "m_shortdesc", "width": 100},
 			{"data": "name", "width": 100},
             {"data": "subject", "width": 100},
 			{"data": null, "width": 70, "className": "text-center"}
       ],
-		"columnDefs": [				
+		"columnDefs": [
 			{
-				"targets": 7,
-				"orderable": true,
-				"searchable": false,
-				"render": function ( data, type, row ) {
-					if (row.nm_progres == 'OPEN') {
-						return '<span class="badge badge-danger text-center">OPEN</span>';
-					} 
-                    if (row.nm_progres == 'PENDING') {
-						return '<span class="badge badge-warning text-center">PENDING</span>';
-					}
-                    if (row.nm_progres == 'CLOSE') {
-                        return '<span class="badge badge-success text-center">CLOSE</span>';
-                    }
-				},
-			},
+				"targets": 0,
+				"visible": false,
+			},				
 			{
 				"targets": -1,
 				"orderable": false,

@@ -4,6 +4,8 @@
 
 function initPage(){
 	LobiAdmin.highlightCode();
+
+	// $('#sqm').autoNumeric('init', formatDecimalNumber);
 	
 	initValidationDefaults();
 	$("#form_input").validate({
@@ -32,22 +34,22 @@ function initPage(){
 			},
 		},
 		"columns": [
-			{"data": "kd_store"},
-			{"data": "nm_store"},
+			{"data": "m_code"},
+			{"data": "m_shortdesc"},
+			{"data": "m_type"},
+			{"data": "m_island"},
+			{"data": "sqm"},
 			{"data": "status", "width": 40, "className": "text-center"},
 			{"data": null, "width": 70, "className": "text-center"}
       ],
 		"columnDefs": [
-			//{
-			//	"targets": 2,
-			//	"orderable": true,
-			//	"searchable": false,
-			//	"render": function ( data, type, row ) {
-			//		return accounting.formatNumber(row.margin, 2);
-			//	},
-			//},
 			{
-				"targets": 2,
+				"targets": 4,
+				"orderable": true,
+				"searchable": false,
+			},
+			{
+				"targets": 5,
 				"orderable": true,
 				"searchable": false,
 				"render": function ( data, type, row ) {
@@ -91,8 +93,12 @@ function Simpan() {
 	
 	data2Send = JSON.stringify({
 		id: idData,
-		kd_store: $('#kd_store').val(),
-		nm_store: $('#nm_store').val(),
+		m_code: $('#kd_store').val(),
+		m_shortdesc: $('#nm_store').val(),
+		m_type: $('#m_type').val(),
+		m_island: $('#m_island').val(),
+		sqm: $('#sqm').val(),
+		// sqm: accounting.unformat($("#sqm").val(),_decimalSeparator),
 		status: $('#status').is(':checked') ? 1 : 0
 	});
 	
@@ -126,8 +132,11 @@ function app_edit(id = null) {
 			action = 'edit';
 			let row = data.data;
 			idData = row.id
-			$('#kd_store').val(row.kd_store); $('#kd_store').prop('readonly', true);
-			$('#nm_store').val(row.nm_store);
+			$('#kd_store').val(row.m_code); $('#kd_store').prop('readonly', true);
+			$('#nm_store').val(row.m_shortdesc);
+			$('#m_type').val(row.m_type);
+			$('#m_island').val(row.m_island);
+			$('#sqm').val(row.sqm);
 			$('#status').prop('checked', row.status == 1 ? true : false);
 		} else {
 			MsgBox.Notification(data.msg.toString(), 'bottom right', 'warning');

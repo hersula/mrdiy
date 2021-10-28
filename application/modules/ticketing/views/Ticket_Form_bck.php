@@ -8,15 +8,6 @@
    }
 </style>
 <div class="main">
-   <div class="row margin-bottom-15 padding-left-10">
-      <div class="col-md-12">
-         <button type="button" class="btn btn-outline-dark waves-effect waves-light" id="kembali" name="kembali" onclick="Kembali()"> <span class="btn-label"><i class="glyphicon glyphicon-chevron-left"></i></span> Kembali </button>
-         <div class="pull-right">
-            <button type="button" class="btn btn-success waves-effect waves-light" id="simpan" name="simpan" onclick="Simpan();"> <span class="btn-label"><i class="glyphicon glyphicon-floppy-saved"></i></span> Simpan </button>
-
-         </div>
-      </div>
-   </div>
    <div class="row padding-horizontal-10">
       <div class="col-md-12 mt-3">
          <div class="card">
@@ -24,22 +15,11 @@
                <form id="form_header" name="form_header" role="form" class="lobi-form">
                   <legend>
                      Form Ticket
-                     <div class="pull-right" id="doc_no">
-                        <!-- PO-202006000001 -->
-                        <!-- <label class="control-label">No Doc</label> -->
+                     <!-- <div class="pull-right" id="doc_no">
                         <input class="form-control disable" type="text" id="doc_no_val" name="doc_no_val" value="" readonly>
-                     </div>
+                     </div> -->
                   </legend>
                   <div class="row padding-horizontal-10">
-                     <div class="form-group col-md-3" id="doc_date_container">
-                        <label class="control-label">Tanggal Ticket <span class="text-danger">*</span></label>
-                        <div class="input-group date">
-                           <input type="text" class="form-control font-size-sm" placeholder="Tanggal Ticket" id="doc_date" name="doc_date" value="<?=date('Y-m-d h:i:s')?>">
-                           <div class="input-group-append">
-                              <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
-                           </div>
-                        </div>
-                     </div>
                      <div class="col-md-3">
                         <div class="form-group">
                             <label>Site *</label>
@@ -114,18 +94,6 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>User Name *</label>
-                            <select class="form-control type" id="user_id" name="user_id">
-                                <option value="">- Choose Store -</option>
-                                <?php foreach ($this->db->get('app_users')->result() as $key => $value): ?>
-                                <option value="<?php echo $value->user_id ?>" data-name="<?php echo $value->name; ?>">
-                                    <?php echo $value->name; ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        </div>
-                    </div>
                   </div>
                   <div class="row padding-horizontal-10 mt-3">
                     <div class="col-md-9">
@@ -139,10 +107,29 @@
                     <div class="col-md-9">
                         <div class="form-group">
                             <label>Message *</label>
-                            <textarea class="form-control" id="pesan" name="pesan" rows="6" cols="50" value=""></textarea>
+                            <!-- <textarea class="form-control" id="pesan" name="pesan" rows="6" cols="50" value=""></textarea> -->
+                            <textarea id="elm1" name="area"></textarea>
                         </div>
                     </div>
                   </div>
+                  <div class="row padding-horizontal-10 mt-3">
+                  <div class="col-md-6">
+                     <div class="button-items">
+                        <button type="button" class="btn btn-outline-primary btn-sm waves-effect waves-light"
+                           id="reset_form" name="reset_form" onclick="ResetForm();"><i class="mdi mdi-repeat"></i>
+                           Reset</button>
+                     </div>
+                  </div>
+                  <div class="col-md-6 text-right">
+                     <?php if ($priv_arr['create_flag'] || $priv_arr['edit_flag']) { ?>
+                     <div class="button-items">
+                        <button type="button" class="btn btn-outline-success btn-sm waves-effect waves-light"
+                           id="simpan" name="simpan" onclick="Simpan();"><i class="fas fa-save"></i>
+                           Simpan</button>
+                     </div>
+                     <?php } ?>
+                  </div>
+               
                </form>
             </div>
          </div>
@@ -150,24 +137,6 @@
    </div>
 
 </div>
-
-<style>
-   [contenteditable="true"].single-line {
-      white-space: nowrap;
-      width: 200px;
-      overflow: hidden;
-   }
-
-   [contenteditable="true"].single-line br {
-      display: none;
-
-   }
-
-   [contenteditable="true"].single-line * {
-      display: inline;
-      white-space: nowrap;
-   }
-</style>
 
 <script type="text/javascript">
    // START VARIABEL WAJIB
@@ -185,18 +154,10 @@
    var data4DataTable = [];
 
    LobiAdmin.loadScript([
-      '<?=base_url()?>assets/js/lib/autoNumeric/autoNumeric.js',
-      '<?=base_url()?>assets/js/lib/accounting/accounting.min.js',
-   ], function() {
-      LobiAdmin.loadScript([
-         '<?=base_url()?>assets/js/lib/autoNumeric/init.js',
-         '<?=base_url()?>assets/js/lib/accounting/init.js',
-      ], function() {
-         LobiAdmin.loadScript([
-            '<?=base_url()?>assets/js/modules/' + Modules + '/' + Controller + '.form.js?v=<?=date('YmdHis') . rand()?>',
-         ], function() {
-            initPage();
-         });
-      });
-   });
+        '<?=base_url()?>assets/libs/tinymce/tinymce.min.js',
+        '<?=base_url()?>assets/js/pages/form-editor.init.js',
+		'<?=base_url()?>assets/js/modules/' + Modules + '/' + Controller + '.js?v=<?=date('YmdHis').rand()?>'
+	], function() {
+		initPage();
+	});
 </script>

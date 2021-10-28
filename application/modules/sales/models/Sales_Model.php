@@ -6,6 +6,12 @@ class Sales_Model extends Core_Model {
         parent::__construct();
    }
 	
+    function getList() {
+        $this->datatables->select("deskripsi, today, lw, plw, mtd, lm, plm, ly, ply");
+        $this->datatables->from('r_sales');
+        
+        return $this->datatables->generate();
+    }
 
     function ambiltrx() {
         $today=date('Y-m-d', strtotime("yesterday"));
@@ -45,4 +51,5 @@ class Sales_Model extends Core_Model {
         }
         return false;
     }
+
 }

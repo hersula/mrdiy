@@ -157,30 +157,30 @@ class Store extends Core_Controller {
    *                              END DEFAULT FUNCTION                            *
    *******************************************************************************/
 	
-	// function getDivisiList($action = "home") {
-	// 	$data['ColHeader'] = array('Divisi Code', 'Divisi Name');
-	// 	$data['ColShow'] = array(1, 1);
-	// 	$data['columns'] = array(
-	// 		array('data' => 'divisi_code'),
-	// 		array('data' => 'divisi_name'),
-	// 	);
-	// 	$data['columnDefs'] = array(
-	// 		array('targets' => 0, 'orderable' => false, 'searchable' => true),
-	// 		array('targets' => 1, 'orderable' => true, 'searchable' => true),
-	// 	);
-	// 	switch ($action) {
-	// 		case 'nav':
-	// 			$this->output->set_content_type('application/json');
-	// 			echo $this->m_app->getDivisiList();
-	// 			break;
-	// 		case 'home':
-	// 			$data['Judul'] = 'Divisi List';
-	// 			$data['src_url'] = base_url().$this->data['modules'].'/'.$this->data['controller'].'/'.$this->data['action'];
-	// 			$data['end_point'] = '';
-	// 			$this->load->view('LOV', $data);
-	// 			break;
-	// 	}
-	// }
+	function getStoreList($action = "home") {
+		$data['ColHeader'] = array('Store Code', 'Store Name');
+		$data['ColShow'] = array(1, 1);
+		$data['columns'] = array(
+			array('data' => 'm_code'),
+			array('data' => 'm_shortdesc'),
+		);
+		$data['columnDefs'] = array(
+			array('targets' => 0, 'orderable' => false, 'searchable' => true),
+			array('targets' => 1, 'orderable' => true, 'searchable' => true),
+		);
+		switch ($action) {
+			case 'nav':
+				$this->output->set_content_type('application/json');
+				echo $this->m_app->getStoreList();
+				break;
+			case 'home':
+				$data['Judul'] = 'Store List';
+				$data['src_url'] = base_url().$this->data['modules'].'/'.$this->data['controller'].'/'.$this->data['action'];
+				$data['end_point'] = '';
+				$this->load->view('LOV', $data);
+				break;
+		}
+	}
 
 	// function getDivisiSelect2($format = 'json') {
 	// 	# START Check input, jika tidak ada input atau kosong maka tidak di lanjutkan

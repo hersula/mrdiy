@@ -8,26 +8,30 @@
    }
 </style>
 <div class="main">
-   <div class="row margin-bottom-15 padding-left-10">
-      <div class="col-md-12">
-         <button type="button" class="btn btn-outline-dark waves-effect waves-light" id="kembali" name="kembali" onclick="Kembali()"> <span class="btn-label"><i class="glyphicon glyphicon-chevron-left"></i></span> Kembali </button>
-         <div class="pull-right">
-            <button type="button" class="btn btn-success waves-effect waves-light" id="simpan" name="simpan" onclick="Simpan();"> <span class="btn-label"><i class="glyphicon glyphicon-floppy-saved"></i></span> Simpan </button>
-
-         </div>
-      </div>
-   </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="alert alert-primary mb-0" role="alert">
+                        <h4 class="alert-heading font-18">INPUT TICKET</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
    <div class="row padding-horizontal-10">
       <div class="col-md-12 mt-3">
          <div class="card">
             <div class="card-body">
-               <form id="form_header" name="form_header" role="form" class="lobi-form">
-                  <legend>
-                     Form Ticket
-                     <!-- <div class="pull-right" id="doc_no">
-                        <input class="form-control disable" type="text" id="doc_no_val" name="doc_no_val" value="" readonly>
-                     </div> -->
-                  </legend>
+            <form id="form_input" name="form_input">
+                  <div class="row padding-horizontal-20">
+                    <div class="col-md-9"><span class="pull-right">
+                        <div class="form-group">
+                            <label>No. Doc</label>
+                            <input type="text" class="form-control nodoc" id="no_doc" name="no_doc" value="" readonly="false" />
+                        </div>
+                </span></div>
+                  </div>
                   <div class="row padding-horizontal-10">
                      <div class="col-md-3">
                         <div class="form-group">
@@ -94,13 +98,16 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label>Store *</label>
-                            <select class="form-control type" id="kd_store" name="kd_store">
-                                <option value="">- Choose Store -</option>
-                                <?php foreach ($this->db->get('m_store')->result() as $key => $value): ?>
-                                <option value="<?php echo $value->kd_store ?>" data-name="<?php echo $value->nm_store; ?>">
-                                    <?php echo $value->nm_store; ?></option>
-                                <?php endforeach ?>
-                            </select>
+                            <div class="input-group">
+                                <input type="hidden" class="form-control font-size-sm ignore" id="kd_store" name="kd_store"
+                                    value="" placeholder="Store Name">
+                                <input type="text" class="form-control font-size-sm ignore" id="nm_store"
+                                    name="nm_store" value="" placeholder="Store Name" readonly />
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-info btn-sm waves-effect waves-light" type="button"
+                                        onclick="LOVDefStore();"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                   </div>
@@ -121,6 +128,37 @@
                         </div>
                     </div>
                   </div>
+                  <div class="row padding-horizontal-10 mt-3">
+
+                      <div class="form-group form-group-sm col-md-8">
+                          <label class="control-label">Upload Lampiran</label>
+                          <input type="file" class="form-control font-size-sm" placeholder="File Lampiran" id="lampiran"
+                              name="lampiran" value=""
+                              accept="application/pdf, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, image/png, image/jpeg" />
+                          *
+                          max. 1
+                          MB
+                          <span class="tooltip tooltip-top-right">Upload Lampiran</span>
+                      </div>
+                  </div>
+                  <div class="row padding-horizontal-10 mt-3">
+                  <div class="col-md-6">
+                     <div class="button-items">
+                        <button type="button" class="btn btn-outline-primary btn-sm waves-effect waves-light"
+                           id="reset_form" name="reset_form" onclick="ResetForm();"><i class="mdi mdi-repeat"></i>
+                           Reset</button>
+                     </div>
+                  </div>
+                  <div class="col-md-6 text-right">
+                     <?php if ($priv_arr['create_flag'] || $priv_arr['edit_flag']) { ?>
+                     <div class="button-items">
+                        <button type="button" class="btn btn-outline-success btn-sm waves-effect waves-light"
+                           id="simpan" name="simpan" onclick="Simpan();"><i class="fas fa-save"></i>
+                           Simpan</button>
+                     </div>
+                     <?php } ?>
+                  </div>
+               
                </form>
             </div>
          </div>
@@ -128,45 +166,27 @@
    </div>
 
 </div>
-
-<style>
-   [contenteditable="true"].single-line {
-      white-space: nowrap;
-      width: 200px;
-      overflow: hidden;
-   }
-
-   [contenteditable="true"].single-line br {
-      display: none;
-
-   }
-
-   [contenteditable="true"].single-line * {
-      display: inline;
-      white-space: nowrap;
-   }
-</style>
-
 <script type="text/javascript">
-   // START VARIABEL WAJIB
    var Modules = '<?=$modules?>';
    var Controller = '<?=$controller?>';
    var Priv = JSON.parse('<?=json_encode($priv_arr)?>');
    var data2Send = null;
-   var action = '<?=$action?>';
-   var _id = "<?=$action == 'edit' ? $id : 'null'?>";
+   var dataArr = [];
+   var DataTable = null;
    // END VARIABEL WAJIB
+   var action = '<?=$action?>';
+   var idData = null;
+   var id = <?=$action == 'edit' ? $id : 'null'?>;
 
-   var _dataTable = null;
-   var DataTableAction = 'create';
-   var DataTableRowIdx = 0;
-   var data4DataTable = [];
-
+   
    LobiAdmin.loadScript([
-        '<?=base_url()?>assets/libs/tinymce/tinymce.min.js',
+    '<?=base_url()?>assets/libs/tinymce/tinymce.min.js',
         '<?=base_url()?>assets/js/pages/form-editor.init.js',
-		'<?=base_url()?>assets/js/modules/' + Modules + '/' + Controller + '.js?v=<?=date('YmdHis').rand()?>'
-	], function() {
-		initPage();
-	});
+      '<?= base_url() ?>assets/libs/select2/js/select2.full.min.js',
+	   '<?= base_url() ?>assets/js/plugin/fileinput/fileinput.min.js',
+      '<?= base_url() ?>assets/js/modules/' + Modules + '/' + Controller + '.form.js?v=<?= date('YmdHis') . rand() ?>',
+   ], function() {
+      initPage();
+   });
 </script>
+

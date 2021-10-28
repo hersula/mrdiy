@@ -51,6 +51,24 @@
                   </div>
                   <div class="col-md-12">
                      <div class="form-group">
+                        <label>Type *</label>
+                        <input type="text" class="form-control font-size-sm" placeholder="Type" id="m_type" name="m_type" value="" />
+                     </div>
+                  </div>
+                  <div class="col-md-12">
+                     <div class="form-group">
+                        <label>Island *</label>
+                        <input type="text" class="form-control font-size-sm" placeholder="Island" id="m_island" name="m_island" value="" />
+                     </div>
+                  </div>
+                  <div class="col-md-12">
+                     <div class="form-group">
+                        <label>SQM *</label>
+                        <input type="text" class="form-control font-size-sm" id="sqm" name="sqm" value="" />
+                     </div>
+                  </div>
+                  <div class="col-md-12">
+                     <div class="form-group">
                         <label>Aktif</label><br />
                         <input type="checkbox" class="form-control" id="status" name="status" switch="success" value="1" checked />
                         <label for="status" data-on-label="Yes" data-off-label="No"></label>
@@ -123,6 +141,9 @@
                      <tr>
                         <th>Store Code</th>
                         <th>Store Name</th>
+                        <th>Type</th>
+                        <th>Island</th>
+                        <th>SQM</th>
                         <th class="text-center">Status</th>
                         <th class="text-center">Actions</th>
                      </tr>

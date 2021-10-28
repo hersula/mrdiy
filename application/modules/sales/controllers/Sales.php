@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Sales extends Core_Controller {
 
@@ -14,12 +14,19 @@ class Sales extends Core_Controller {
 		$data = array (
             'trx' => $this->m_app->ambiltrx(),
             'qty' => $this->m_app->ambilqty(),
-            'amt' => $this->m_app->ambilamt()
+            'amt' => $this->m_app->ambilamt(),
+			// 'getlist' => $this->m_app->getlist(),
         );
         
 		/* echo "dashboard";
 		echo "<pre>"; print_r($this->data); echo "</pre>"; exit; */
 		$this->load->view('Sales', $data);
+	}
+	
+	function getList() {
+			
+		$this->output->set_content_type('application/json');
+		echo $this->m_app->getList();
 	}
 	
 	/* 

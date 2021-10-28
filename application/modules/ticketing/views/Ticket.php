@@ -93,12 +93,13 @@
             <table id="table_list_data" class="table table-striped table-bordered dt-responsive wrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                <thead>
                   <tr>
-                     <!-- <th>ID</th> -->
+                     <th>ID</th>
                      <th>No Doc</th>
                      <th>Ticket Date</th>
                      <th>Site</th>
                      <th>Type</th>
                      <th>Category</th>
+                     <th>Priority</th>
                      <th class="text-center">Progress</th>
                      <th>Store</th>
                      <th>Name</th>
