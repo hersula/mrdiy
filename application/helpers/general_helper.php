@@ -151,3 +151,39 @@ function shortNumber($num)
     }
     return round($num, 1) . $units[$i];
 }
+
+function unformat_numeric($value)
+{
+    $locale = "id-ID|id_ID";
+    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+        $locale = explode("|", $locale);
+        $locale = $locale[1];
+    }
+
+    $formatter = new NumberFormatter($locale, NumberFormatter::DECIMAL);
+    $formatter->setAttribute(NumberFormatter::MAX_FRACTION_DIGITS, 42);
+    $formatter->setSymbol(NumberFormatter::GROUPING_SEPARATOR_SYMBOL, ".");
+    $formatter->setSymbol(NumberFormatter::DECIMAL_SEPARATOR_SYMBOL, ",");
+    return str_replace(",", ".", $formatter->parse($value));
+}
+
+function thousandsCurrencyFormat($num)
+{
+
+    if ($num > 1000) {
+
+        $x = round($num);
+        $x_number_format = number_format($x);
+        $x_array = explode(',', $x_number_format);
+        $x_parts = array('k', 'm', 'b', 't');
+        $x_count_parts = count($x_array) - 1;
+        $x_display = $x;
+        $x_display = $x_array[0] . ((int) $x_array[1][0] !== 0 ? '.' . $x_array[1][0] : '');
+        $x_display .= $x_parts[$x_count_parts - 1];
+
+        return $x_display;
+
+    }
+
+    return $num;
+}

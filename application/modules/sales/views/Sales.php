@@ -116,6 +116,7 @@
                             <th>lm(%)</th>
                             <th>ly</th>
                             <th>ly(%)</th>
+                            <th>urut</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -144,6 +145,7 @@
                             <th>lm(%)</th>
                             <th>ly</th>
                             <th>ly(%)</th>
+                            <th>urut</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -172,6 +174,7 @@
                             <th>lm(%)</th>
                             <th>ly</th>
                             <th>ly(%)</th>
+                            <th>urut</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -200,6 +203,7 @@
                             <th>lm(%)</th>
                             <th>ly</th>
                             <th>ly(%)</th>
+                            <th>urut</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -228,6 +232,7 @@
                             <th>lm(%)</th>
                             <th>ly</th>
                             <th>ly(%)</th>
+                            <th>urut</th>
                         </tr>
                     </thead>
                     <tbody>
