@@ -7,44 +7,50 @@ class Sales_Model extends Core_Model {
    }
 	
     function getSameStore() {
+        $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_ss');
-        
+        $this->db->where('tanggal', $today);
         return $this->datatables->generate();
     }
 
     function getAllStore() {
+        $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_all');
-        
+        $this->db->where('tanggal', $today);
         return $this->datatables->generate();
     }
 
     function getFsStore() {
+        $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_fs');
-        
+        $this->db->where('tanggal', $today);
         return $this->datatables->generate();
     }
 
     function getMallStore() {
+        $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_mall');
-        
+        $this->db->where('tanggal', $today);
         return $this->datatables->generate();
     }
 
     function getJavaStore() {
+        $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_java');
-        
+        $this->db->where('tanggal', $today);
         return $this->datatables->generate();
     }
 
     function getNonStore() {
+        $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_nonjava');
-        
+        $this->db->where('tanggal', $today);
         return $this->datatables->generate();
     }
 
