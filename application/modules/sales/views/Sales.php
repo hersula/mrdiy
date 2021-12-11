@@ -81,13 +81,13 @@
                         <tr>
                             <th>Deskripsi</th>
                             <th>Today</th>
-                            <th>lw</th>
-                            <th>lw(%)</th>
-                            <th>mtd</th>
-                            <th>lm</th>
-                            <th>lm(%)</th>
-                            <th>ly</th>
-                            <th>ly(%)</th>
+                            <th>LW</th>
+                            <th>LW(%)</th>
+                            <th>MTD</th>
+                            <th>LM</th>
+                            <th>LM(%)</th>
+                            <th>LY</th>
+                            <th>LY(%)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -109,13 +109,13 @@
                         <tr>
                             <th>Deskripsi</th>
                             <th>Today</th>
-                            <th>lw</th>
-                            <th>lw(%)</th>
-                            <th>mtd</th>
-                            <th>lm</th>
-                            <th>lm(%)</th>
-                            <th>ly</th>
-                            <th>ly(%)</th>
+                            <th>LW</th>
+                            <th>LW(%)</th>
+                            <th>MTD</th>
+                            <th>LM</th>
+                            <th>LM(%)</th>
+                            <th>LY</th>
+                            <th>LY(%)</th>
                             <th>urut</th>
                         </tr>
                     </thead>
@@ -138,13 +138,13 @@
                         <tr>
                             <th>Deskripsi</th>
                             <th>Today</th>
-                            <th>lw</th>
-                            <th>lw(%)</th>
-                            <th>mtd</th>
-                            <th>lm</th>
-                            <th>lm(%)</th>
-                            <th>ly</th>
-                            <th>ly(%)</th>
+                            <th>LW</th>
+                            <th>LW(%)</th>
+                            <th>MTD</th>
+                            <th>LM</th>
+                            <th>LM(%)</th>
+                            <th>LY</th>
+                            <th>LY(%)</th>
                             <th>urut</th>
                         </tr>
                     </thead>
@@ -167,13 +167,13 @@
                         <tr>
                             <th>Deskripsi</th>
                             <th>Today</th>
-                            <th>lw</th>
-                            <th>lw(%)</th>
-                            <th>mtd</th>
-                            <th>lm</th>
-                            <th>lm(%)</th>
-                            <th>ly</th>
-                            <th>ly(%)</th>
+                            <th>LW</th>
+                            <th>LW(%)</th>
+                            <th>MTD</th>
+                            <th>LM</th>
+                            <th>LM(%)</th>
+                            <th>LY</th>
+                            <th>LY(%)</th>
                             <th>urut</th>
                         </tr>
                     </thead>
@@ -196,13 +196,13 @@
                         <tr>
                             <th>Deskripsi</th>
                             <th>Today</th>
-                            <th>lw</th>
-                            <th>lw(%)</th>
-                            <th>mtd</th>
-                            <th>lm</th>
-                            <th>lm(%)</th>
-                            <th>ly</th>
-                            <th>ly(%)</th>
+                            <th>LW</th>
+                            <th>LW(%)</th>
+                            <th>MTD</th>
+                            <th>LM</th>
+                            <th>LM(%)</th>
+                            <th>LY</th>
+                            <th>LY(%)</th>
                             <th>urut</th>
                         </tr>
                     </thead>
@@ -225,13 +225,13 @@
                         <tr>
                             <th>Deskripsi</th>
                             <th>Today</th>
-                            <th>lw</th>
-                            <th>lw(%)</th>
-                            <th>mtd</th>
-                            <th>lm</th>
-                            <th>lm(%)</th>
-                            <th>ly</th>
-                            <th>ly(%)</th>
+                            <th>LW</th>
+                            <th>LW(%)</th>
+                            <th>MTD</th>
+                            <th>LM</th>
+                            <th>LM(%)</th>
+                            <th>LY</th>
+                            <th>LY(%)</th>
                             <th>urut</th>
                         </tr>
                     </thead>
