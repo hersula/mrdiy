@@ -1,7 +1,7 @@
 <?php if (! defined('BASEPATH')) {exit('No direct script access allowed');}
 
 class Ticket_Model extends Core_Model {
-	
+	public $trans_code = "ST";
 	function __construct(){
         parent::__construct();
    }
@@ -9,7 +9,7 @@ class Ticket_Model extends Core_Model {
 	/*******************************************************************************
    *                            START DEFAULT FUNCTION                            *
    *******************************************************************************/
-  public function generate_trans_number($kd_site)
+  public function generate_trans_number($tgl_trans)
   {
 	  /**
 	   * Format penomoran dokumen
@@ -34,13 +34,13 @@ class Ticket_Model extends Core_Model {
 	  $prefix = $this->trans_code;
 	  $year = date('y', strtotime($tgl_trans));
 	  $month = date('m', strtotime($tgl_trans));
-	  $prefix_full = $prefix . $kd_site;
+	  $prefix_full = $prefix . $month . $year;
 	  # Get last number
 	  $this->db->select("MAX(no_doc) AS code");
 	  $this->db->from("t_ticket");
-	  $this->db->where([
-		  "kd_site" => $kd_site,
-	  ]);
+	//   $this->db->where([
+	// 	  "kd_store" => $kd_site,
+	//   ]);
 	  $get_last_number = $this->db->get()->row_array();
 	  # Jika nomor sudah ada tambahkan 1, jika tidak ada kembali ke 1
 	  if ($get_last_number != null) {
@@ -54,7 +54,8 @@ class Ticket_Model extends Core_Model {
   }
 
 	function save($input) {
-		// $no_doc = $this->generate_trans_number($input['kd_store']);
+		$tgl_trans = date('Y-m-d');
+		$no_doc = $this->generate_trans_number($tgl_trans);
 		// $no_doc = "00001";
 		// $cek = $this->db->query("SELECT * FROM t_ticket WHERE no_doc=?", array($input['no_doc']));
 		// if ($cek->row() != NULL) {
@@ -64,7 +65,7 @@ class Ticket_Model extends Core_Model {
 		$data_input = (object) $input;
 		$data2send = json_decode($data_input->data2Send);
 		$data = array(
-			// 'no_doc' => $no_doc,
+			'no_doc' => $no_doc,
 			'kd_site' => $data2send->kd_site,
 			'kd_type' => $data2send->kd_type,
 			'kd_category' => $data2send->kd_category,
@@ -146,14 +147,14 @@ class Ticket_Model extends Core_Model {
 	}
 	
 	function getList($filter) {
-		$this->datatables->select("a.id, a.no_doc, a.creation_date, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, g.m_shortdesc, h.name, a.subject");
+		$this->datatables->select("a.id, a.no_doc, a.creation_date, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, g.m_odesc, h.name, a.subject");
 	 		$this->datatables->from('t_ticket a');
 	 		$this->datatables->join('m_site b', 'b.kd_site=a.kd_site', 'left');
 			$this->datatables->join('m_type c', 'c.kd_type=a.kd_type', 'left');
 			$this->datatables->join('m_category d', 'd.kd_category = a.kd_category', 'left');
 			$this->datatables->join('m_priority e', 'e.kd_priority = a.kd_priority', 'left');
 			$this->datatables->join('m_progres f', 'f.kd_progres = a.kd_progres', 'left');
-			$this->datatables->join('m_customer g', 'g.m_code = a.kd_store', 'left');
+			$this->datatables->join('m_customer g', 'trim(g.m_code) = trim(a.kd_store)', 'left');
 			$this->datatables->join('app_users h', 'h.user_id = a.user_id', 'left');
 
 		

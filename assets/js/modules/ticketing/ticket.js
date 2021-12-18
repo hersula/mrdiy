@@ -44,7 +44,7 @@ function initPage(){
 			{"data": "nm_category", "width": 50},			
 			{"data": "nm_priority", "width": 50},
 			{"data": "nm_progres", "width": 40, "className": "text-center"},
-			{"data": "m_shortdesc", "width": 100},
+			{"data": "m_odesc", "width": 100},
 			{"data": "name", "width": 100},
             {"data": "subject", "width": 100},
 			{"data": null, "width": 70, "className": "text-center"}
