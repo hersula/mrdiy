@@ -111,6 +111,47 @@ class PDFReport extends TCPDF {
       $this->Cell(25,5," Status",1,0,'L');
       $this->Ln(5);
     }
+
+    function Bank($data) {
+      $this->SetFont('helvetica','8',14);
+      $this->Cell(0,5,'Daftar Bank',0,0,'L');
+      $this->Ln(20);
+
+      $this->SetFont('helvetica','B',8);
+      $this->Cell(50,5," ID Bank",1,0,'L');
+      $this->Cell(100,5," Nama Bank",1,0,'L');
+      $this->Cell(25,5," Status",1,0,'L');
+      $this->Ln(5);
+    }
+
+    function Edc($data) {
+        $this->SetFont('helvetica','8',14);
+        $this->Cell(0,5,'Daftar EDC Toko',0,0,'L');
+        $this->Ln(20);
+  
+        $this->SetFont('helvetica','B',8);
+        $this->Cell(50,5," Nama Toko",1,0,'L');
+        $this->Cell(100,5," Nama Bank",1,0,'L');
+        $this->Cell(100,5," TID",1,0,'L');
+        $this->Cell(100,5," MID",1,0,'L');
+        $this->Cell(100,5," Jaringan",1,0,'L');
+        $this->Cell(30,5," Qty",1,0,'L');
+        $this->Cell(25,5," Status",1,0,'L');
+        $this->Ln(5);
+    }
+
+    function Cardfee($data) {
+        $this->SetFont('helvetica','8',14);
+        $this->Cell(0,5,'Daftar Cardfee',0,0,'L');
+        $this->Ln(20);
+
+        $this->SetFont('helvetica','B',8);
+        $this->Cell(50,5," Cardfee Code",1,0,'L');
+        $this->Cell(100,5," Cardfee Name",1,0,'L');
+        $this->Cell(50,5," Persen",1,0,'L');
+        $this->Cell(25,5," Status",1,0,'L');
+        $this->Ln(5);
+    }  
 	
 	
 	function DaftarColor($data) {

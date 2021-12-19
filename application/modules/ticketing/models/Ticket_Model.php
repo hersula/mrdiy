@@ -135,7 +135,7 @@ class Ticket_Model extends Core_Model {
 		LEFT JOIN m_category d ON d.kd_category = a.kd_category
 		LEFT JOIN m_priority e ON e.kd_priority = a.kd_priority
 		LEFT JOIN m_progres f ON f.kd_progres = a.kd_progres
-		LEFT JOIN m_customer g ON g.m_code = a.kd_store
+		LEFT JOIN m_customer g ON trim(g.m_code) = trim(a.kd_store)
 		LEFT JOIN app_users h ON h.user_id = a.user_id
 		WHERE a.id=?", array($id));
 													
@@ -166,65 +166,25 @@ class Ticket_Model extends Core_Model {
 		return $this->datatables->generate();
 	}
 	
-	function getDataList($filter) {
-	  //$this->db->select("c.divisi_code, a.employee_id, a.employee_name, b.jabatan_name, a.join_date, CASE WHEN a.employee_status = 1 THEN 'TETAP'
-	//						WHEN a.employee_status = 2 THEN 'KONTRAK'
-	//						WHEN a.employee_status = 3 THEN 'RESIGN' END AS employee_status,
-	//						CASE WHEN a.kelamin = 1 THEN 'PRIA' ELSE 'WANITA' END AS kelamin");
-	//  $this->db->from('m_employee_data a');
-	//  $this->db->join('m_jabatan b', 'b.jabatan_code=a.jabatan', 'left');
-	//  $this->db->join('m_divisi c'. 'c.divisi_code=b.divisi_code', 'left');
-	//	foreach($filter as $key => $val) {
-	//		if (trim($val) != "" || !empty($val) || $val != NULL) {
-	//			$this->db->where($key, $val);
-	//		}
-	//	}
-	//	return $this->db->get();
-
-		$id_employee = $this->session->userdata('employee_id');
-		$divisi = $this->session->userdata('divisi_code');
-		$store = $this->session->userdata('store_id');
-		$users = $this->session->userdata('user_id');
-	
-		$query	 = $this->db->query("SELECT store_id FROM m_store_users WHERE user_id = '".$users."'");
-		if ($divisi != 'RBHC'){	
-			$this->datatables->select("a.id, b.divisi_code, d.store_name, a.employee_id, a.employee_name, a.atasan_id, c.employee_name as atasan_name, b.jabatan_name, a.join_date, a.employee_status,
-									 a.kelamin, a.active");
-			$this->datatables->from('m_employee_data a');
-			$this->datatables->join('m_jabatan b', 'b.jabatan_code=a.jabatan_code', 'left');
-			$this->datatables->join('m_employee_data c', 'c.employee_id=a.atasan_id', 'left');
-			$this->datatables->join('m_store d', 'd.store_id = a.store_id', 'left');
-			$this->datatables->where('a.active', 1);
-			$this->datatables->where('a.atasan_id', $id_employee);
+	function getDataList() {
 		
-			$strstoreid = '';	
-			foreach ($query->result() as $row){
-			
-				$this->datatables->or_where('d.store_id', $row->store_id);
-			}	
 
-		} elseif ($id_employee = NULL) {
-			$this->datatables->select("a.id, b.divisi_code, d.store_name, a.employee_id, a.employee_name, a.atasan_id, c.employee_name as atasan_name, b.jabatan_name, a.join_date, a.employee_status,
-							a.kelamin, a.active");
-			$this->datatables->from('m_employee_data a');
-			$this->datatables->join('m_jabatan b', 'b.jabatan_code=a.jabatan_code', 'left');
-			$this->datatables->join('m_employee_data c', 'c.employee_id=a.atasan_id', 'left');
-			$this->datatables->join('m_store d', 'd.store_id = a.store_id', 'left');
-			$this->datatables->where('a.active', 1);  
-		} else {
-			$this->datatables->select("a.id, b.divisi_code, d.store_name, a.employee_id, a.employee_name, a.atasan_id, c.employee_name as atasan_name, b.jabatan_name, a.join_date, a.employee_status,
-							a.kelamin, a.active");
-			$this->datatables->from('m_employee_data a');
-			$this->datatables->join('m_jabatan b', 'b.jabatan_code=a.jabatan_code', 'left');
-			$this->datatables->join('m_employee_data c', 'c.employee_id=a.atasan_id', 'left');
-			$this->datatables->join('m_store d', 'd.store_id = a.store_id', 'left');
-			$this->datatables->where('a.active', 1);
-		}
-		foreach($filter as $key => $val) {
-			if (trim($val) != "" || !empty($val) || $val != NULL) {
-				$this->datatables->where($key, $val);
-			}
-		}
+		$this->datatables->select("a.no_doc, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, g.m_odesc, h.name, a.subject");
+	 		$this->datatables->from('t_ticket a');
+	 		$this->datatables->join('m_site b', 'b.kd_site=a.kd_site', 'left');
+			$this->datatables->join('m_type c', 'c.kd_type=a.kd_type', 'left');
+			$this->datatables->join('m_category d', 'd.kd_category = a.kd_category', 'left');
+			$this->datatables->join('m_priority e', 'e.kd_priority = a.kd_priority', 'left');
+			$this->datatables->join('m_progres f', 'f.kd_progres = a.kd_progres', 'left');
+			$this->datatables->join('m_customer g', 'trim(g.m_code) = trim(a.kd_store)', 'left');
+			$this->datatables->join('app_users h', 'h.user_id = a.user_id', 'left');
+
+		
+		// foreach($filter as $key => $val) {
+		// 	if (trim($val) != "" || !empty($val) || $val != NULL) {
+		// 		$this->datatables->where($key, $val);
+		// 	}
+		// }
 		return $this->datatables->generate();
 	}
 

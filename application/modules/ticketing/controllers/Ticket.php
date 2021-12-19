@@ -176,14 +176,15 @@ class Ticket extends Core_Controller {
 		# Judul laporan
 		$JudulLaporan = "Ticket List";
 		# Ambil data
-		$filter = array(
-			'a.active' => $this->input->post("active", TRUE),
-		);
-		$rs = $this->m_app->getDataList($filter);
+		// $filter = array(
+		// 	'a.active' => $this->input->post("active", TRUE),
+		// );
+		//$rs = $this->m_app->getDataList($filter);
+		$rs = $this->m_app->getDataList();
 		# Deklarasi kolom yang akan ditampilkan
-		$Col['header'] = array('Karyawan Code', 'Karyawan Name',  'Status');
-		$Col['type'] = array('string', 'string', 'string');
-		$Col['align'] = array('left', 'left', 'center');
+		$Col['header'] = array('No Doc', 'Site', 'Tipe', 'Kategori', 'Prioritas', 'Progres', 'Toko', 'User', 'Subject');
+		$Col['type'] = array('string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string');
+		$Col['align'] = array('left', 'left', 'left', 'left', 'left', 'left', 'left', 'left', 'left');
 		# Load library
 		$this->load->library('XLSReport');
 		$xls = new XLSReport();
@@ -191,7 +192,8 @@ class Ticket extends Core_Controller {
 		if ($rs->num_rows() >= 1000000) {
 			$xls->generateCSVByQueryObj($rs, $JudulLaporan, ";");
 		} else {
-			$xls->generateXlsByQueryObj($rs, $Col, $JudulLaporan);
+			// $xls->generateXlsByQueryObj($rs, $Col, $JudulLaporan);
+			$xls->generateCSVByQueryObj($rs, $JudulLaporan, ";");
 		}
 	}
 
