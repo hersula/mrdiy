@@ -1,7 +1,7 @@
 <?php if (! defined('BASEPATH')) {exit('No direct script access allowed');}
 
 class Sales_Model extends Core_Model {
-	
+
 	function __construct(){
         parent::__construct();
    }
@@ -10,7 +10,7 @@ class Sales_Model extends Core_Model {
         $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_ss');
-        $this->db->where('tanggal', $today);
+        $this->datatables->where('tanggal', $today);
         return $this->datatables->generate();
     }
 
@@ -18,7 +18,7 @@ class Sales_Model extends Core_Model {
         $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_all');
-        $this->db->where('tanggal', $today);
+        $this->datatables->where('tanggal', $today);
         return $this->datatables->generate();
     }
 
@@ -26,7 +26,7 @@ class Sales_Model extends Core_Model {
         $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_fs');
-        $this->db->where('tanggal', $today);
+        $this->datatables->where('tanggal', $today);
         return $this->datatables->generate();
     }
 
@@ -34,7 +34,7 @@ class Sales_Model extends Core_Model {
         $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_mall');
-        $this->db->where('tanggal', $today);
+        $this->datatables->where('tanggal', $today);
         return $this->datatables->generate();
     }
 
@@ -42,7 +42,7 @@ class Sales_Model extends Core_Model {
         $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_java');
-        $this->db->where('tanggal', $today);
+        $this->datatables->where('tanggal', $today);
         return $this->datatables->generate();
     }
 
@@ -50,7 +50,7 @@ class Sales_Model extends Core_Model {
         $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_nonjava');
-        $this->db->where('tanggal', $today);
+        $this->datatables->where('tanggal', $today);
         return $this->datatables->generate();
     }
 

@@ -5,6 +5,7 @@ class Sales extends Core_Controller {
 	function __construct(){
 		parent::__construct("sales"); # parsing menu_id
 		$this->load->model("Sales_Model", "m_app");
+		//$filter = date('Y-m-d', strtotime("yesterday"));
 	}
 
 	/*******************************************************************************
@@ -18,10 +19,15 @@ class Sales extends Core_Controller {
 	  }
 	  
 	function create() {
-		$this->load->view('Sales_Form', $this->data);
+		$this->data['action'] = 'create';
+		$this->load->view('Salesdash', $this->data);
 	}
 
-	function getSameStore() {	
+	// function salesori() {
+	// 	$this->load->view('Sales', $this->data);
+	// }
+
+	function getSameStore() {
 		$this->output->set_content_type('application/json');
 		echo $this->m_app->getSameStore();				
 	}

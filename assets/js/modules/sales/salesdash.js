@@ -22,7 +22,112 @@ function initPage(){
 	LobiAdmin.highlightCode();
 	
 	
-	DataTable = $('#table_list_data').DataTable({ 
+	// DataTable = $('#table_list_data').DataTable({ 
+	// 	"order": [[9, 'asc']],
+	// 	"pageLength" : 10,
+	// 	"processing": true,
+	// 	"serverSide": true,
+	// 	"responsive": true,
+	// 	"ajax": {
+	// 		"url": base_url + Modules + '/' + Controller + '/getSameStore',
+	// 		"type": "POST",
+	// 		"data": function ( i ) {
+	// 			i.kd_progres = $('#kd_progres').val();
+	// 			// d.employee_status = $('#filter_status_karyawan').val();
+	// 		},
+	// 	},
+	// 	"columns": [
+	// 		{"data": "deskripsi", "width": 100},
+	// 		{ 
+	// 			"data": "today", "className": "text-right", 
+	// 			"render": function ( data, type, row, meta ) {
+	// 				return accounting.formatNumber(row.today);
+	// 			}
+	// 		},
+	// 		{ 
+	// 			"data": "lw", "className": "text-right", 
+	// 			"render": function ( data, type, row, meta ) {
+	// 				return accounting.formatNumber(row.lw);
+	// 			}
+	// 		},
+	// 		{"data": "plw", "width": 50, "className": "text-right"},
+	// 		{ 
+	// 			"data": "mtd", "className": "text-right", 
+	// 			"render": function ( data, type, row, meta ) {
+	// 				return accounting.formatNumber(row.mtd);
+	// 			}
+	// 		},
+	// 		{ 
+	// 			"data": "lm", "className": "text-right", 
+	// 			"render": function ( data, type, row, meta ) {
+	// 				return accounting.formatNumber(row.lm);
+	// 			}
+	// 		},
+	// 		{"data": "plm", "width": 50, "className": "text-right"},
+	// 		{ 
+	// 			"data": "ly", "className": "text-right", 
+	// 			"render": function ( data, type, row, meta ) {
+	// 				return accounting.formatNumber(row.ly);
+	// 			}
+	// 		},
+	// 		{"data": "ply", "width": 50, "className": "text-right"},
+	// 		{"data": "urut"}
+    //   ],	 
+	//   "columnDefs": [
+	// 	{
+	// 		"targets": 0,
+	// 		"orderable": false,
+	// 		"searchable": true,
+	// 	},
+	// 	{
+	// 		"targets": 1,
+	// 		"orderable": false,
+	// 		"searchable": true,
+	// 	},
+	// 	{
+	// 		"targets": 2,
+	// 		"orderable": false,
+	// 		"searchable": true,
+	// 	},
+	// 	{
+	// 		"targets": 3,
+	// 		"orderable": false,
+	// 		"searchable": true,
+	// 	},
+	// 	{
+	// 		"targets": 4,
+	// 		"orderable": false,
+	// 		"searchable": true,
+	// 	},
+	// 	{
+	// 		"targets": 5,
+	// 		"orderable": false,
+	// 		"searchable": true,
+	// 	},
+	// 	{
+	// 		"targets": 6,
+	// 		"orderable": false,
+	// 		"searchable": true,
+	// 	},
+	// 	{
+	// 		"targets": 7,
+	// 		"orderable": false,
+	// 		"searchable": true,
+	// 	},
+	// 	{
+	// 		"targets": 8,
+	// 		"orderable": false,
+	// 		"searchable": true,
+	// 	},
+	// 	{
+	// 		"targets": 9,
+	// 		"visible": false,
+	// 		"orderable": true,
+	// 	},
+	// ],
+	// });
+
+	DataTable = $('#table_same_data').DataTable({ 
 		"order": [[9, 'asc']],
 		"pageLength" : 10,
 		"processing": true,

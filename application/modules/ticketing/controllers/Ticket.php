@@ -192,8 +192,8 @@ class Ticket extends Core_Controller {
 		if ($rs->num_rows() >= 1000000) {
 			$xls->generateCSVByQueryObj($rs, $JudulLaporan, ";");
 		} else {
-			// $xls->generateXlsByQueryObj($rs, $Col, $JudulLaporan);
-			$xls->generateCSVByQueryObj($rs, $JudulLaporan, ";");
+			$xls->generateXlsByQueryObj($rs, $Col, $JudulLaporan);
+			// $xls->generateCSVByQueryObj($rs, $JudulLaporan, ";");
 		}
 	}
 

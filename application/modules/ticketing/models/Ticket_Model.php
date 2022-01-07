@@ -167,25 +167,34 @@ class Ticket_Model extends Core_Model {
 	}
 	
 	function getDataList() {
-		
-
-		$this->datatables->select("a.no_doc, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, g.m_odesc, h.name, a.subject");
-	 		$this->datatables->from('t_ticket a');
-	 		$this->datatables->join('m_site b', 'b.kd_site=a.kd_site', 'left');
-			$this->datatables->join('m_type c', 'c.kd_type=a.kd_type', 'left');
-			$this->datatables->join('m_category d', 'd.kd_category = a.kd_category', 'left');
-			$this->datatables->join('m_priority e', 'e.kd_priority = a.kd_priority', 'left');
-			$this->datatables->join('m_progres f', 'f.kd_progres = a.kd_progres', 'left');
-			$this->datatables->join('m_customer g', 'trim(g.m_code) = trim(a.kd_store)', 'left');
-			$this->datatables->join('app_users h', 'h.user_id = a.user_id', 'left');
-
-		
+		// $this->db->select("a.no_doc, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, g.m_odesc, h.name, a.subject");
+      	// $this->db->from('t_ticket a');
+		// $this->db->join('m_store b', 'b.m_code=a.store', 'left');
 		// foreach($filter as $key => $val) {
 		// 	if (trim($val) != "" || !empty($val) || $val != NULL) {
-		// 		$this->datatables->where($key, $val);
+		// 		$this->db->where($key, $val);
 		// 	}
 		// }
-		return $this->datatables->generate();
+		// $this->db->order_by('a.sales_date', 'asc');
+		// return $this->db->get();
+
+		$this->db->select("a.no_doc, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, g.m_odesc, h.name, a.subject");
+	 		$this->db->from('t_ticket a');
+	 		$this->db->join('m_site b', 'b.kd_site=a.kd_site', 'left');
+			$this->db->join('m_type c', 'c.kd_type=a.kd_type', 'left');
+			$this->db->join('m_category d', 'd.kd_category = a.kd_category', 'left');
+			$this->db->join('m_priority e', 'e.kd_priority = a.kd_priority', 'left');
+			$this->db->join('m_progres f', 'f.kd_progres = a.kd_progres', 'left');
+			$this->db->join('m_customer g', 'trim(g.m_code) = trim(a.kd_store)', 'left');
+			$this->db->join('app_users h', 'h.user_id = a.user_id', 'left');
+
+		
+		foreach($filter as $key => $val) {
+			if (trim($val) != "" || !empty($val) || $val != NULL) {
+				$this->datatables->where($key, $val);
+			}
+		}
+		return $this->db->get();
 	}
 
 	/*******************************************************************************

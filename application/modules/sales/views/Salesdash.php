@@ -60,23 +60,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title mb-4">Same Store Sales</h4>
-
-                <!-- <div class="row text-center mt-4">
-                    <div class="col-4">
-                        <h5 class="font-size-20"><?=shortnumber($trx);?></h5>
-                        <p class="text-muted">Transaction</p>
-                    </div>
-                    <div class="col-4">
-                        <h5 class="font-size-20"><?=shortnumber($qty);?></h5>
-                        <p class="text-muted">Item Sold</p>
-                    </div>
-                    <div class="col-4">
-                        <h5 class="font-size-20">IDR <?=shortnumber($amt);?></h5>
-                        <p class="text-muted">Balance</p>
-                    </div>
-                </div> -->
-
-                <table id="table_list_data" class="table table-striped table-bordered dt-responsive wrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                <table id="table_same_data" class="table table-striped table-bordered dt-responsive wrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
                             <th>Deskripsi</th>
@@ -88,6 +72,7 @@
                             <th>LM(%)</th>
                             <th>LY</th>
                             <th>LY(%)</th>
+                            <th>urut</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -245,8 +230,27 @@
     </div>
 </div>
 
-
 <script type="text/javascript">
+	// START VARIABEL WAJIB
+	var Modules = '<?=$modules?>';
+	var Controller = '<?=$controller?>';
+	var Priv = JSON.parse('<?=json_encode($priv_arr)?>');
+	var data2Send = null;
+	var dataArr = [];
+    var DataTable = null;
+   var DataAll = null;
+   var DataFs = null;
+   var DataMall = null;
+   var DataJava = null;
+   var DataNon = null;
+	// var DataTable = null;
+	// END VARIABEL WAJIB
+   
+   $.getScript(['<?=base_url()?>assets/js/modules/' + Modules + '/salesdash.js?v=<?=date('YmdHis').rand()?>'], function() {
+      initPage();
+   });
+</script>
+<!-- <script type="text/javascript">
    // START VARIABEL WAJIB
    var Modules = '<?=$modules?>';
    var Controller = '<?=$controller?>';
@@ -268,4 +272,4 @@
    ], function() {
       initPage();
    });
-</script>
+</script> -->
