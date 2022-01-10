@@ -182,9 +182,9 @@ class Ticket extends Core_Controller {
 		//$rs = $this->m_app->getDataList($filter);
 		$rs = $this->m_app->getDataList();
 		# Deklarasi kolom yang akan ditampilkan
-		$Col['header'] = array('No Doc', 'Site', 'Tipe', 'Kategori', 'Prioritas', 'Progres', 'Toko', 'User', 'Subject');
-		$Col['type'] = array('string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string');
-		$Col['align'] = array('left', 'left', 'left', 'left', 'left', 'left', 'left', 'left', 'left');
+		$Col['header'] = array('No Doc', 'Site', 'Tipe', 'Kategori', 'Prioritas', 'Progres', 'Toko', 'User', 'Subject', 'Created');
+		$Col['type'] = array('string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string');
+		$Col['align'] = array('left', 'left', 'left', 'left', 'left', 'left', 'left', 'left', 'left', 'left');
 		# Load library
 		$this->load->library('XLSReport');
 		$xls = new XLSReport();

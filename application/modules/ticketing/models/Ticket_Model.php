@@ -178,7 +178,7 @@ class Ticket_Model extends Core_Model {
 		// $this->db->order_by('a.sales_date', 'asc');
 		// return $this->db->get();
 
-		$this->db->select("a.no_doc, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, g.m_odesc, h.name, a.subject");
+		$this->db->select("a.no_doc, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, g.m_odesc, h.name, a.subject, a.created_by");
 	 		$this->db->from('t_ticket a');
 	 		$this->db->join('m_site b', 'b.kd_site=a.kd_site', 'left');
 			$this->db->join('m_type c', 'c.kd_type=a.kd_type', 'left');
