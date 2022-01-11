@@ -31,7 +31,7 @@ function initPage(){
 			"url": base_url + Modules + '/' + Controller + '/getList',
 			"type": "POST",
 			"data": function ( i ) {
-				i.kd_progres = $('#kd_progres').val();
+				i.kd_progres = $('#filter_progres').val();
 				// d.employee_status = $('#filter_status_karyawan').val();
 			},
 		},
@@ -44,7 +44,8 @@ function initPage(){
 			{"data": "nm_category", "width": 50},			
 			{"data": "nm_priority", "width": 50},
 			{"data": "nm_progres", "width": 40, "className": "text-center"},
-			{"data": "m_odesc", "width": 100},
+			// {"data": "m_odesc", "width": 100},
+			{"data": "nm_store", "width": 100},
 			{"data": "name", "width": 100},
             {"data": "subject", "width": 100},
 			{"data": null, "width": 70, "className": "text-center"}

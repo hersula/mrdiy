@@ -50,31 +50,19 @@
                               <div class="col-md-2">
                                  <div class="form-group">
                                     <label>Status</label>
-                                    <select id="kd_progres" name="kd_progres" class="form-control">
+                                    <select id="filter_progres" name="filter_progres" class="form-control">
+                                       <option value="">ALL</option>
                                        <option value="1">OPEN</option>
                                        <option value="2">PENDING</option>
                                        <option value="3">CLOSE</option>
                                     </select>
                                  </div>
                               </div>
-                              <!-- <div class="col-md-2">
-                                 <div class="form-group">
-                                    <label>Status Karyawan</label>
-                                    <select id="filter_status_karyawan" name="filter_status_karyawan" class="form-control font-size-sm">
-                                       <option value="">SEMUA</option>
-                                       <option value="1">TETAP</option>
-                                       <option value="2">KONTRAK</option>
-                                       <option value="3">TRAINING</option>
-                                       <option value="4">PROBITION</option>
-                                       <option value="5">KHL</option>
-                                    </select>
-                                 </div>
-                              </div> -->
-                              <div class="col-md-6">
-                                 <div class="form-group text-right">
+                              <div class="col-md-10">
+                                 <div class="form-group text-left">
                                     <label>&nbsp;</label>
                                     <div class="button-items">
-                                       <button type="button" class="btn btn-outline-info btn-sm waves-effect waves-light" id="search" name="search" onclick="Filter();"><i class="fas fa-filter"></i> Terapkan filter</button>
+                                       <button type="button" class="btn btn-outline-info btn-sm waves-effect waves-light" id="search" name="search" onclick="app_refresh();"><i class="fas fa-filter"></i> Terapkan filter</button>
                                     </div>
                                  </div>
                               </div>

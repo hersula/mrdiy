@@ -147,7 +147,8 @@ class Ticket_Model extends Core_Model {
 	}
 	
 	function getList($filter) {
-		$this->datatables->select("a.id, a.no_doc, a.creation_date, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, g.m_odesc, h.name, a.subject");
+		$loguser = $this->session->userdata('user_id');
+		$this->datatables->select("a.id, a.no_doc, a.creation_date, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, coalesce(g.m_odesc, b.nm_site) as nm_store, h.name, a.subject");
 	 		$this->datatables->from('t_ticket a');
 	 		$this->datatables->join('m_site b', 'b.kd_site=a.kd_site', 'left');
 			$this->datatables->join('m_type c', 'c.kd_type=a.kd_type', 'left');
@@ -157,28 +158,21 @@ class Ticket_Model extends Core_Model {
 			$this->datatables->join('m_customer g', 'trim(g.m_code) = trim(a.kd_store)', 'left');
 			$this->datatables->join('app_users h', 'h.user_id = a.user_id', 'left');
 
-		
 		foreach($filter as $key => $val) {
 			if (trim($val) != "" || !empty($val) || $val != NULL) {
 				$this->datatables->where($key, $val);
 			}
 		}
+
+		if ($loguser != "root") {
+			$this->datatables->where('a.created_by', $loguser);
+		}
 		return $this->datatables->generate();
 	}
 	
-	function getDataList() {
-		// $this->db->select("a.no_doc, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, g.m_odesc, h.name, a.subject");
-      	// $this->db->from('t_ticket a');
-		// $this->db->join('m_store b', 'b.m_code=a.store', 'left');
-		// foreach($filter as $key => $val) {
-		// 	if (trim($val) != "" || !empty($val) || $val != NULL) {
-		// 		$this->db->where($key, $val);
-		// 	}
-		// }
-		// $this->db->order_by('a.sales_date', 'asc');
-		// return $this->db->get();
-
-		$this->db->select("a.no_doc, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, g.m_odesc, h.name, a.subject, a.created_by");
+	function getDataList($filter) {
+		$loguser = $this->session->userdata('user_id');
+		$this->db->select("a.no_doc, b.nm_site, c.nm_type, d.nm_category, e.nm_priority, f.nm_progres, coalesce(g.m_odesc, b.nm_site) as nm_store, h.name, a.subject, a.created_by");
 	 		$this->db->from('t_ticket a');
 	 		$this->db->join('m_site b', 'b.kd_site=a.kd_site', 'left');
 			$this->db->join('m_type c', 'c.kd_type=a.kd_type', 'left');
@@ -191,8 +185,12 @@ class Ticket_Model extends Core_Model {
 		
 		foreach($filter as $key => $val) {
 			if (trim($val) != "" || !empty($val) || $val != NULL) {
-				$this->datatables->where($key, $val);
+				$this->db->where($key, $val);
 			}
+		}
+
+		if ($loguser != "root") {
+			$this->datatables->where('a.created_by', $loguser);
 		}
 		return $this->db->get();
 	}

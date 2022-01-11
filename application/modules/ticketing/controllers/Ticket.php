@@ -22,7 +22,7 @@ class Ticket extends Core_Controller {
 
 	function getList() {
 		$filter = array(
-			'a.active' => $this->input->post("active", TRUE),
+			'a.kd_progres' => $this->input->post("kd_progres", TRUE),
 			#'a.employee_status' => $this->input->post("employee_status", TRUE),
 		);
 	
@@ -176,11 +176,12 @@ class Ticket extends Core_Controller {
 		# Judul laporan
 		$JudulLaporan = "Ticket List";
 		# Ambil data
-		// $filter = array(
-		// 	'a.active' => $this->input->post("active", TRUE),
-		// );
+		$filter = array(
+			'a.kd_progres' => $this->input->post("filter_progres", TRUE),
+		);
+		
 		//$rs = $this->m_app->getDataList($filter);
-		$rs = $this->m_app->getDataList();
+		$rs = $this->m_app->getDataList($filter);
 		# Deklarasi kolom yang akan ditampilkan
 		$Col['header'] = array('No Doc', 'Site', 'Tipe', 'Kategori', 'Prioritas', 'Progres', 'Toko', 'User', 'Subject', 'Created');
 		$Col['type'] = array('string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string');
