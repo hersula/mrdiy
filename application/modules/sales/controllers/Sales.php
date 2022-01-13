@@ -15,7 +15,7 @@ class Sales extends Core_Controller {
   	function index() {
 		//$this->data['action'] = 'create';
 	
-		$this->load->view('Sales', $this->data);
+		$this->load->view('Salesdash', $this->data);
 	  }
 	  
 	function create() {
@@ -28,33 +28,51 @@ class Sales extends Core_Controller {
 	// }
 
 	function getSameStore() {
+		$filter = array(
+			'tanggal' => $this->input->post("tanggal", TRUE),
+		);
 		$this->output->set_content_type('application/json');
-		echo $this->m_app->getSameStore();				
+		echo $this->m_app->getSameStore($filter);				
 	}
 
 	function getAllStore() {
+		$filter = array(
+			'tanggal' => $this->input->post("tanggal", TRUE),
+		);
 		$this->output->set_content_type('application/json');
-		echo $this->m_app->getAllStore();
+		echo $this->m_app->getAllStore($filter);
 	}
 
 	function getFsStore() {
+		$filter = array(
+			'tanggal' => $this->input->post("tanggal", TRUE),
+		);
 		$this->output->set_content_type('application/json');
-		echo $this->m_app->getFsStore();
+		echo $this->m_app->getFsStore($filter);
 	}
 
 	function getMallStore() {
+		$filter = array(
+			'tanggal' => $this->input->post("tanggal", TRUE),
+		);
 		$this->output->set_content_type('application/json');
-		echo $this->m_app->getMallStore();
+		echo $this->m_app->getMallStore($filter);
 	}
 
 	function getJavaStore() {
+		$filter = array(
+			'tanggal' => $this->input->post("tanggal", TRUE),
+		);
 		$this->output->set_content_type('application/json');
-		echo $this->m_app->getJavaStore();
+		echo $this->m_app->getJavaStore($filter);
 	}
 
 	function getNonStore() {
+		$filter = array(
+			'tanggal' => $this->input->post("tanggal", TRUE),
+		);
 		$this->output->set_content_type('application/json');
-		echo $this->m_app->getNonStore();
+		echo $this->m_app->getNonStore($filter);
 	}
 
 	function save($format = 'json') {

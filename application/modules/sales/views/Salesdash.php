@@ -10,52 +10,69 @@
         </div>
     </div>
 </div>
-<!-- <div class="row">
-    <div class="col-md-4">
-        <div class="card mini-stat bg-info">
-            <div class="card-body mini-stat-img">
-                <div class="mini-stat-icon">
-                    <i class="mdi mdi-book-open-page-variant float-right"></i>
-                </div>
-                <div class="text-white">                    
-                    <h6 class="text-uppercase mb-3 font-size-16">Daily Transaction</h6>
-                    <?php ?>
-                    <h2 class="mb-4"><?=shortnumber($trx);?></h2>
-                    <a href="#sales/transaction/index" class="text-light float-right">Detail per tanggal <?=date('d-m-Y', strtotime("yesterday")) ?><i class="mdi mdi-chevron-double-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>    
-    <div class="col-md-4">
-        <div class="card mini-stat bg-info">
-            <div class="card-body mini-stat-img">
-                <div class="mini-stat-icon">
-                    <i class="mdi mdi-briefcase-check float-right"></i>
-                </div>
-                <div class="text-white">
-                    <h6 class="text-uppercase mb-3 font-size-16">Item Sold</h6>
-                    <h2 class="mb-4"><?=shortnumber($qty);?></h2>
-                    <a href="#sales/quantity/index" class="text-light float-right">Detail per tanggal <?=date('d-m-Y', strtotime("yesterday")) ?><i class="mdi mdi-chevron-double-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card mini-stat bg-info">
-            <div class="card-body mini-stat-img">
-                <div class="mini-stat-icon">
-                    <i class="mdi mdi-buffer float-right"></i>
-                </div>
-                <div class="text-white">
-                    <h6 class="text-uppercase mb-3 font-size-16">Balance</h6>
-                    <h2 class="mb-4">IDR <?=shortnumber($amt);?></h2>
-                    <a href="#sales/detsales/index" class="text-light float-right">Detail per tanggal <?=date('d-m-Y', strtotime("yesterday")) ?><i class="mdi mdi-chevron-double-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 <div class="row">
+<div class="col-md-12">
+      <div class="card">
+         <div class="card-body">
+            <div id="accordion">
+               <div class="card mb-1 shadow-none">
+                  <div class="card-header p-3" id="headingOne">
+                     <h6 class="m-0 font-size-14">
+                        <a href="#collapseOne" class="text-dark collapsed" data-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">Filter</a>
+                     </h6>
+                  </div>
+                  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                     <div class="card-body">
+                        <form id="form_filter" name="form_filter">
+                           <div class="row">
+                              <!-- <div class="col-md-1">
+                                 <div class="form-group">
+                                    <label>PIC</label>
+                                    <input type="text" class="form-control font-size-sm ignore" name="filter_pic" id="filter_pic" value="" >
+                                 </div>
+                              </div> -->
+                              <!-- <div class="col-md-3">
+                                 <div class="form-group">
+                                    <label>Store *</label>
+                                    <div class="input-group">
+                                       <input type="text" class="form-control font-size-sm ignore" id="filter_store" name="filter_store" value="" placeholder="Store Name" readonly />
+                                       <div class="input-group-append">
+                                          <button class="btn btn-outline-info btn-sm waves-effect waves-light"
+                                             type="button" onclick="LOVDefStore();"><i class="fas fa-search"></i></button>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div> -->
+                              <div class="col-md-2">
+                                 <div class="form-group">
+                                    <label class="control-label">Sales Date</label>
+                                    <div class="input-group date">
+                                       <input type="text" class="form-control font-size-sm ignore"
+                                             id="filter_sales_date" name="filter_sales_date" value="<?=date('Y-m-d', strtotime("yesterday"));?>">
+                                       <div class="input-group-append">
+                                             <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                       </div>
+                                    </div>
+                                    <br>
+                                 </div>
+                              </div>
+                              <div class="col-md-6">
+                                 <div class="form-group">
+                                    <label>&nbsp;</label>
+                                    <div class="button-items">
+                                       <button type="button" class="btn btn-outline-info btn-sm waves-effect waves-light" id="search" name="search" onclick="app_refresh();"><i class="fas fa-filter"></i> Terapkan filter</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
     <div class="col-xl-12">
         <div class="card">
             <div class="card-body">

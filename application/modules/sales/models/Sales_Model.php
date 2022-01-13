@@ -6,51 +6,81 @@ class Sales_Model extends Core_Model {
         parent::__construct();
    }
 	
-    function getSameStore() {
-        $today=date('Y-m-d', strtotime("yesterday"));
+    function getSameStore($filter) {
+        // $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_ss');
-        $this->datatables->where('tanggal', $today);
+        // $this->datatables->where('tanggal', $today);
+        foreach($filter as $key => $val) {
+			if (trim($val) != "" || !empty($val) || $val != NULL) {
+				$this->datatables->where($key, $val);
+			}
+		}
         return $this->datatables->generate();
     }
 
-    function getAllStore() {
-        $today=date('Y-m-d', strtotime("yesterday"));
+    function getAllStore($filter) {
+        // $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_all');
-        $this->datatables->where('tanggal', $today);
+        // $this->datatables->where('tanggal', $today);
+        foreach($filter as $key => $val) {
+			if (trim($val) != "" || !empty($val) || $val != NULL) {
+				$this->datatables->where($key, $val);
+			}
+		}
         return $this->datatables->generate();
     }
 
-    function getFsStore() {
-        $today=date('Y-m-d', strtotime("yesterday"));
+    function getFsStore($filter) {
+        // $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_fs');
-        $this->datatables->where('tanggal', $today);
+        // $this->datatables->where('tanggal', $today);
+        foreach($filter as $key => $val) {
+			if (trim($val) != "" || !empty($val) || $val != NULL) {
+				$this->datatables->where($key, $val);
+			}
+		}
         return $this->datatables->generate();
     }
 
-    function getMallStore() {
-        $today=date('Y-m-d', strtotime("yesterday"));
+    function getMallStore($filter) {
+        // $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_mall');
-        $this->datatables->where('tanggal', $today);
+        // $this->datatables->where('tanggal', $today);
+        foreach($filter as $key => $val) {
+			if (trim($val) != "" || !empty($val) || $val != NULL) {
+				$this->datatables->where($key, $val);
+			}
+		}
         return $this->datatables->generate();
     }
 
-    function getJavaStore() {
-        $today=date('Y-m-d', strtotime("yesterday"));
+    function getJavaStore($filter) {
+        // $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_java');
-        $this->datatables->where('tanggal', $today);
+        // $this->datatables->where('tanggal', $today);
+        foreach($filter as $key => $val) {
+			if (trim($val) != "" || !empty($val) || $val != NULL) {
+				$this->datatables->where($key, $val);
+			}
+		}
         return $this->datatables->generate();
     }
 
-    function getNonStore() {
-        $today=date('Y-m-d', strtotime("yesterday"));
+    function getNonStore($filter) {
+        // $today=date('Y-m-d', strtotime("yesterday"));
         $this->datatables->select("deskripsi,today, lw, plw, mtd, lm, plm, ly, ply, urut");
         $this->datatables->from('rpt_sales_nonjava');
-        $this->datatables->where('tanggal', $today);
+        // $this->datatables->where('tanggal', $today);
+        foreach($filter as $key => $val) {
+			if (trim($val) != "" || !empty($val) || $val != NULL) {
+				$this->datatables->where($key, $val);
+			}
+		}
         return $this->datatables->generate();
     }
 
