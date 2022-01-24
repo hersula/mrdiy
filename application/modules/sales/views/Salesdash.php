@@ -82,12 +82,12 @@
                         <tr>
                             <th>Deskripsi</th>
                             <th>Today</th>
-                            <th>LW</th>
+                            <th>LW (Last Week)</th>
                             <th>LW(%)</th>
-                            <th>MTD</th>
-                            <th>LM</th>
+                            <th>MTD (Month to Date)</th>
+                            <th>LM (Last Month)</th>
                             <th>LM(%)</th>
-                            <th>LY</th>
+                            <th>LY (Last Year)</th>
                             <th>LY(%)</th>
                             <th>urut</th>
                         </tr>
@@ -111,12 +111,12 @@
                         <tr>
                             <th>Deskripsi</th>
                             <th>Today</th>
-                            <th>LW</th>
+                            <th>LW (Last Week)</th>
                             <th>LW(%)</th>
-                            <th>MTD</th>
-                            <th>LM</th>
+                            <th>MTD (Month to Date)</th>
+                            <th>LM (Last Month)</th>
                             <th>LM(%)</th>
-                            <th>LY</th>
+                            <th>LY (Last Year)</th>
                             <th>LY(%)</th>
                             <th>urut</th>
                         </tr>
@@ -140,12 +140,12 @@
                         <tr>
                             <th>Deskripsi</th>
                             <th>Today</th>
-                            <th>LW</th>
+                            <th>LW (Last Week)</th>
                             <th>LW(%)</th>
-                            <th>MTD</th>
-                            <th>LM</th>
+                            <th>MTD (Month to Date)</th>
+                            <th>LM (Last Month)</th>
                             <th>LM(%)</th>
-                            <th>LY</th>
+                            <th>LY (Last Year)</th>
                             <th>LY(%)</th>
                             <th>urut</th>
                         </tr>
@@ -169,12 +169,12 @@
                         <tr>
                             <th>Deskripsi</th>
                             <th>Today</th>
-                            <th>LW</th>
+                            <th>LW (Last Week)</th>
                             <th>LW(%)</th>
-                            <th>MTD</th>
-                            <th>LM</th>
+                            <th>MTD (Month to Date)</th>
+                            <th>LM (Last Month)</th>
                             <th>LM(%)</th>
-                            <th>LY</th>
+                            <th>LY (Last Year)</th>
                             <th>LY(%)</th>
                             <th>urut</th>
                         </tr>
@@ -198,12 +198,12 @@
                         <tr>
                             <th>Deskripsi</th>
                             <th>Today</th>
-                            <th>LW</th>
+                            <th>LW (Last Week)</th>
                             <th>LW(%)</th>
-                            <th>MTD</th>
-                            <th>LM</th>
+                            <th>MTD (Month to Date)</th>
+                            <th>LM (Last Month)</th>
                             <th>LM(%)</th>
-                            <th>LY</th>
+                            <th>LY (Last Year)</th>
                             <th>LY(%)</th>
                             <th>urut</th>
                         </tr>
@@ -227,12 +227,12 @@
                         <tr>
                             <th>Deskripsi</th>
                             <th>Today</th>
-                            <th>LW</th>
+                            <th>LW (Last Week)</th>
                             <th>LW(%)</th>
-                            <th>MTD</th>
-                            <th>LM</th>
+                            <th>MTD (Month to Date)</th>
+                            <th>LM (Last Month)</th>
                             <th>LM(%)</th>
-                            <th>LY</th>
+                            <th>LY (Last Year)</th>
                             <th>LY(%)</th>
                             <th>urut</th>
                         </tr>
