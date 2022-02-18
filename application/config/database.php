@@ -98,7 +98,7 @@ $db['default'] = array(
 
 $db['mrdiy'] = array(
 	'dsn'	=> '',
-	'hostname' => '139.255.48.210',
+	'hostname' => '139.255.48.211',
 	'username' => 'postgres',
 	'password' => 'Qaz123wsxa@',
 	'database' => 'project1_db',
