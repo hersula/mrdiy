@@ -54,12 +54,13 @@ function initPage(){
 		},
 		"columns": [
             { 
-				"data": "sales_closedate", "width": 100,
+				"data": "sales_closedate", 
 				"render": function ( data, type, row, meta ) {
 					return moment(row.sales_closedate).format('DD/MM/YYYY');
 				}
 			},
-            {"data": "sales_store", "width": 50},
+            {"data": "sales_store"},
+			{"data": "m_shortdesc"},
 			{ 
 				"data": "trx", "className": "text-right", 
 				"render": function ( data, type, row, meta ) {

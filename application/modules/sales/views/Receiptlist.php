@@ -66,7 +66,8 @@
                     <thead>
                         <tr>
                             <th>Close Date</th>
-                            <th>Store</th>
+                            <th>Store Code</th>
+                            <th>Store Name</th>
                             <th>Transaction</th>
                             <th>Quantity</th>
                             <th>AMT</th>

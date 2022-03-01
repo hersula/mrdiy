@@ -8,8 +8,9 @@ class Receipt_Model extends Core_Model {
 	
     function getList($filter) {
         // $today=date('Y-m-d', strtotime("yesterday"));
-        $this->datatables->select("sales_closedate,sales_store, trx, qty, amt");
-        $this->datatables->from('sales_daily_detail');
+        $this->datatables->select("a.sales_closedate, a.sales_store, b.m_shortdesc, a.trx, a.qty, a.amt");
+        $this->datatables->from('sales_daily_detail a');
+        $this->datatables->join('m_customer b', 'trim(a.sales_store) = trim(b.m_code)', 'left');
         // $this->datatables->where('tanggal', $today);
         foreach($filter as $key => $val) {
 			if (trim($val) != "" || !empty($val) || $val != NULL) {
