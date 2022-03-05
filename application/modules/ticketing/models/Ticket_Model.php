@@ -95,13 +95,16 @@ class Ticket_Model extends Core_Model {
 	
 	function update($input) {
 		//print "xxxx";exit;
-		$data = array(			
-			'kd_progres' => $input['kd_progres'],						
+		$data_input = (object) $input;
+		$data2send = json_decode($data_input->data2Send);
+		$data = array(		
+			'no_doc' => $data2send->no_doc,
+			'kd_progres' => $data2send->kd_progres,						
 			'modified_by' => $this->session->userdata('user_id'),
 			'modification_date' => date('Y-m-d H:i:s')
 		);
 		
-		$this->db->where('subject', $input['subject']);
+		$this->db->where('no_doc', $data['no_doc']);
 		$NonQry = $this->db->update('t_ticket', $data);
 		
 		if (!$NonQry && !empty($this->db->error())) {

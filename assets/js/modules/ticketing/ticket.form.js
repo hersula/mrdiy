@@ -18,6 +18,7 @@
 			.then((data) => {
 				if (data.result) {
 					let row = data.data;
+					$("#no_doc").val(row.no_doc);
 					$("#kd_site").val(row.kd_site);
                     $("#kd_type").val(row.kd_type);
                     $("#kd_category").val(row.kd_category);
@@ -76,7 +77,7 @@ function app_create() {
 function Simpan() {
 
 	data2Send = {
-		// no_doc: $("#no_doc").val(),
+		no_doc: $("#no_doc").val(),
         kd_site: $("#kd_site").val(),
         kd_type: $("#kd_type").val(),
 		kd_category: $("#kd_category").val(),

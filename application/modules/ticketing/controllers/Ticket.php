@@ -82,17 +82,45 @@ class Ticket extends Core_Controller {
 	}
 
 	function update($format = 'json') {
-		# START Check input, jika tidak ada input atau kosong maka tidak di lanjutkan
-		$raw = $this->security->xss_clean($this->input->raw_input_stream);
-		$input = $this->input($format, $raw);
-	
-		if ($input != NULL || trim($input) == '' || !empty($input)) {
-			$hasil = $this->m_app->update($input);
+		$input = $this->input->post();
+        $data2send = json_decode($input['data2Send']);
+		$nis = $this->session->userdata('user_id');
+		
+		$no_doc = $data2send->no_doc;
+		$kd_site = $data2send->kd_site;
+		$kd_type = $data2send->kd_type;
+		$kd_category = $data2send->kd_category;
+		$kd_progres = $data2send->kd_progres;
+		$kd_priority = $data2send->kd_priority;
+		$kd_store = $data2send->kd_store;
+		$user_id = $this->session->userdata('user_id');
+		$subject = $data2send->subject;
+		$pesan = $data2send->pesan;
+
+		$data_upload = uploadDataImg('lampiran', $subject.'_lampiran'.'_'.date('d-m-Y'), './assets/data_upload');
+
+		if (!empty($_FILES)) {
+			if ($input != NULL || trim($input) == '' || !empty($input)) {				
+				if ($data_upload['upload_status'] == true) {
+					$input['lampiran'] = ($data_upload['upload_status'] != false) ? $data_upload['upload_data']['file_name'] : null;
+				}
+				
+				$hasil = $this->m_app->update($input);
+				echo $this->output($format, $hasil);
+			} else {
+				$hasil = array('result' => false, 'msg' => 'Data kosong.', 'data' => NULL);
+				echo $this->output($format, $hasil);
+			}
+			
 		} else {
-			$hasil = array('result' => false, 'msg' => 'Data kosong.', 'data' => NULL);
+			if ($input != NULL || trim($input) == '' || !empty($input)) {
+				$hasil = $this->m_app->update($input);
+				echo $this->output($format, $hasil);
+			} else {
+				$hasil = array('result' => false, 'msg' => 'Data kosong.', 'data' => NULL);
+				echo $this->output($format, $hasil);
+			}
 		}
-	
-		echo $this->output($format, $hasil);
 	}
 
 	function edit($id = NULL) {

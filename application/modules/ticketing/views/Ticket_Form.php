@@ -124,7 +124,7 @@
                         <div class="form-group">
                             <label>Message *</label>
                             <!-- <textarea class="form-control" id="pesan" name="pesan" rows="6" cols="50" value=""></textarea> -->
-                            <textarea id="elm1" name="area"></textarea>
+                            <textarea id="elm1" name="area" class="form-control"></textarea>
                         </div>
                     </div>
                   </div>
