@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-md-6">
         <div class="page-title-box">
-            <h5>Receipt List Sales</h5>
+            <h5>Customer Spending</h5>
             <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a></li>
-                <li class="breadcrumb-item"><a href="javascript: void(0);">Receiplist</a></li>
+                <li class="breadcrumb-item"><a href="javascript: void(0);">Customer Spending</a></li>
             </ol>
         </div>
     </div>
@@ -32,13 +32,12 @@
                                        <input type="text" class="form-control" id="filter_end_date" name="filter_end_date" readonly />
                                     </div>
                                  </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Store Name</label>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" id="store" name="store"/>
-                                        </div>
+                               </div>
+                               <div class="form-group">
+                                   <label>Sales</labeL>
+                                   <div class="input-group">
+                                       <input type="text" class="form-control" id="filter_start_amt" name="filter_start_amt" />
+                                       <input type="text" class="form-control" id="filter_end_amt" name="filter_end_amt" />
                                     </div>
                                 </div>
                               <div class="col-md-6">
@@ -61,16 +60,13 @@
     <div class="col-xl-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title mb-4">Receipt List Sales</h4>
+                <h4 class="card-title mb-4">Customer Spending</h4>
                 <table id="table_same_data" class="table table-striped table-bordered dt-responsive wrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
-                            <th>Close Date</th>
-                            <th>Store Code</th>
-                            <th>Store Name</th>
+                            <th>Region</th>
                             <th>Transaction</th>
-                            <th>Quantity</th>
-                            <th>AMT</th>
+                            <th>Sales</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,7 +88,7 @@
     var DataTable = null;
 	// END VARIABEL WAJIB
    
-   $.getScript(['<?=base_url()?>assets/js/modules/sales/receiptlist.js?v=<?=date('YmdHis').rand()?>'], function() {
+   $.getScript(['<?=base_url()?>assets/js/modules/sales/custspending.js?v=<?=date('YmdHis').rand()?>'], function() {
       initPage();
    });
 </script>

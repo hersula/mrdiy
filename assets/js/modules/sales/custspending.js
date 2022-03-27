@@ -47,30 +47,18 @@ function initPage(){
 			"url": base_url + Modules + '/' + Controller + '/getList',
 			"type": "POST",
 			"data": function ( i ) {
+                i.filter_start_amt = $('#filter_start_amt').val();
+                i.filter_end_amt = $('#filter_end_amt').val();
 				i.filter_start_date = $('#filter_start_date').val();
 				i.filter_end_date = $('#filter_end_date').val();
-                i.store = $('#store').val();
 			},
 		},
 		"columns": [
-            { 
-				"data": "sales_closedate", 
-				"render": function ( data, type, row, meta ) {
-					return moment(row.sales_closedate).format('DD/MM/YYYY');
-				}
-			},
-            {"data": "sales_store"},
-			{"data": "m_shortdesc"},
+            {"data": "region"},
 			{ 
 				"data": "trx", "className": "text-right", 
 				"render": function ( data, type, row, meta ) {
 					return accounting.formatNumber(row.trx);
-				}
-			},
-			{ 
-				"data": "qty", "className": "text-right", 
-				"render": function ( data, type, row, meta ) {
-					return accounting.formatNumber(row.qty);
 				}
 			},
 			{ 
@@ -93,16 +81,6 @@ function initPage(){
 		},
 		{
 			"targets": 2,
-			"orderable": false,
-			"searchable": true,
-		},
-		{
-			"targets": 3,
-			"orderable": false,
-			"searchable": true,
-		},
-		{
-			"targets": 4,
 			"orderable": false,
 			"searchable": true,
 		},

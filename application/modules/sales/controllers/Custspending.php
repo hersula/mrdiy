@@ -1,10 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Receiptlist extends Core_Controller {
+class Custspending extends Core_Controller {
 
 	function __construct(){
-		parent::__construct("receiptlist"); # parsing menu_id
-		$this->load->model("Receipt_Model", "m_app");
+		parent::__construct("custspending"); # parsing menu_id
+		$this->load->model("Custspending_Model", "m_app");
 		//$filter = date('Y-m-d', strtotime("yesterday"));
 	}
 
@@ -15,22 +15,26 @@ class Receiptlist extends Core_Controller {
   	function index() {
 		//$this->data['action'] = 'create';
 	
-		$this->load->view('Receiptlist', $this->data);
+		$this->load->view('Custspending', $this->data);
 	  }
 	  
 	function create() {
 		$this->data['action'] = 'create';
-		$this->load->view('Receiptlist', $this->data);
+		$this->load->view('Custspending', $this->data);
 	}
 
 	function getList() {
         $filter = array (
-			'store' => $this->input->post('store', TRUE),
+			'amt >' => $this->input->post('filter_start_amt', TRUE),
+			'amt <=' => $this->input->post('filter_end_amt', TRUE),
             'sales_closedate >=' => $this->input->post("filter_start_date", TRUE),
             'sales_closedate <=' => $this->input->post("filter_end_date", TRUE),            
         );
 		$this->output->set_content_type('application/json');
 		echo $this->m_app->getList($filter);
+		// $hasil = $this->m_app->getlist($filter);
+		// echo $this->output($format, $hasil);
+		
     }
 
 	
