@@ -55,7 +55,7 @@ class Custspending_Model extends Core_Model {
             select  'Sumatera' as region, sales_closedate, trx, amt
             from sales_daily_detail where left(sales_store,1) in ('S')
             ) x
-            where amt > $filter_amt_l and amt <= $filter_amt_k and sales_closedate > '$sales_closedate_l' and sales_closedate <= '$sales_closedate_k'
+            where amt > $filter_amt_l and amt <= $filter_amt_k and sales_closedate >= '$sales_closedate_l' and sales_closedate <= '$sales_closedate_k'
             group by region, sales_closedate;";
         
         $data = $this->db->query($query)->result_array();
