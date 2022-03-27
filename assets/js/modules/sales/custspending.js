@@ -39,6 +39,8 @@ function initPage(){
 
 	DataTable = $('#table_same_data').DataTable({ 
 		"order": [[0, 'asc']],
+		"ordering": false,
+		"searching": false,
 		"pageLength" : 10,
 		"processing": true,
 		"serverSide": true,
@@ -56,15 +58,15 @@ function initPage(){
 		"columns": [
             {"data": "region"},
 			{ 
-				"data": "trx", "className": "text-right", 
+				"data": "atrx", "className": "text-right", 
 				"render": function ( data, type, row, meta ) {
-					return accounting.formatNumber(row.trx);
+					return accounting.formatNumber(parseInt(row.atrx));
 				}
 			},
 			{ 
-				"data": "amt", "className": "text-right", 
+				"data": "samt", "className": "text-right", 
 				"render": function ( data, type, row, meta ) {
-					return accounting.formatNumber(row.amt);
+					return accounting.formatNumber(parseInt(row.samt));
 				}
 			}
       ],	 

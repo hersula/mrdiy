@@ -91,6 +91,7 @@
    $.getScript(['<?=base_url()?>assets/js/modules/sales/custspending.js?v=<?=date('YmdHis').rand()?>'], function() {
       initPage();
    });
+   
 </script>
 <!-- <script type="text/javascript">
    // START VARIABEL WAJIB

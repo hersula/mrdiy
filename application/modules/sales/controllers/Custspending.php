@@ -14,7 +14,6 @@ class Custspending extends Core_Controller {
 
   	function index() {
 		//$this->data['action'] = 'create';
-	
 		$this->load->view('Custspending', $this->data);
 	  }
 	  
@@ -24,16 +23,27 @@ class Custspending extends Core_Controller {
 	}
 
 	function getList() {
-        $filter = array (
+        // $filter = array (
+		// 	'amt >' => $this->input->post('filter_start_amt', TRUE),
+		// 	'amt <=' => $this->input->post('filter_end_amt', TRUE),
+        //     'sales_closedate >=' => $this->input->post("filter_start_date", TRUE),
+        //     'sales_closedate <=' => $this->input->post("filter_end_date", TRUE),            
+        // );
+		// $this->output->set_content_type('application/json');
+		// echo $this->m_app->getList($filter);
+		// $hasil = $this->m_app->getlist($filter);
+		// echo $this->output($format, $hasil);
+
+		// DATATABLES
+		$filter = array (
 			'amt >' => $this->input->post('filter_start_amt', TRUE),
 			'amt <=' => $this->input->post('filter_end_amt', TRUE),
             'sales_closedate >=' => $this->input->post("filter_start_date", TRUE),
             'sales_closedate <=' => $this->input->post("filter_end_date", TRUE),            
         );
-		$this->output->set_content_type('application/json');
-		echo $this->m_app->getList($filter);
-		// $hasil = $this->m_app->getlist($filter);
-		// echo $this->output($format, $hasil);
+		$this->m_app->getlist($filter);
+		die;
+		
 		
     }
 
