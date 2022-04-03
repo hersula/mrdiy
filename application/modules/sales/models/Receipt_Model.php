@@ -25,7 +25,7 @@ class Receipt_Model extends Core_Model {
         $this->db->select("a.sales_closedate, b.m_shortdesc, b.m_odesc, a.trx, a.qty, a.amt
                             ");
         $this->db->from("sales_daily_detail a");
-        $this->db->join("m_customer b", "b.m_code=a.sales_store", "left");
+        $this->db->join("m_customer b", "trim(b.m_code)=trim(a.sales_store)", "left");
         foreach ($filter as $key => $val) {
             if (trim($val) != "" || !empty($val) || $val != null) {
                 $this->db->where($key, $val);
