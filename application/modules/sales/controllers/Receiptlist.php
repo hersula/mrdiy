@@ -178,16 +178,18 @@ class Receiptlist extends Core_Controller {
 
 	function xls() {
 		# Judul laporan
-		$JudulLaporan = "Ticket List";
+		$JudulLaporan = "Receipt List";
 		# Ambil data
 		$filter = array(
-			'a.active' => $this->input->post("active", TRUE),
+			'a.sales_store' => $this->input->post("active", TRUE),
+			'a.sales_closedate >=' => $this->input->post("filter_start_date", true),
+            'a.sales_closedate <=' => $this->input->post("filter_end_date", true),
 		);
-		$rs = $this->m_app->getDataList($filter);
+		$rs = $this->m_app->get_data4xls($filter);
 		# Deklarasi kolom yang akan ditampilkan
-		$Col['header'] = array('Karyawan Code', 'Karyawan Name',  'Status');
-		$Col['type'] = array('string', 'string', 'string');
-		$Col['align'] = array('left', 'left', 'center');
+		$Col['header'] = array('Close Date', 'Store Code',  'Store Name', 'Transaction', 'Quantity', 'AMT');
+		$Col['type'] = array('date', 'string', 'string', 'numeric', 'numeric', 'money');
+		$Col['align'] = array('left', 'left', 'left', 'right', 'right', 'right');
 		# Load library
 		$this->load->library('XLSReport');
 		$xls = new XLSReport();

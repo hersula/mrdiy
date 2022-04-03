@@ -20,43 +20,20 @@ class Receipt_Model extends Core_Model {
         return $this->datatables->generate();
     }
 
-    function ambiltrx() {
-        $today=date('Y-m-d', strtotime("yesterday"));
-        $this->db->select("sum(trx) as trx");
-        $this->db->from('sales_daily');
-        $this->db->where('sales_closedate', $today);
-
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->row()->trx;
+    public function get_data4xls($filter)
+    {
+        $this->db->select("a.sales_closedate, b.m_shortdesc, b.m_odesc, a.trx, a.qty, a.amt
+                            ");
+        $this->db->from("sales_daily_detail a");
+        $this->db->join("m_customer b", "b.m_code=a.sales_store", "left");
+        foreach ($filter as $key => $val) {
+            if (trim($val) != "" || !empty($val) || $val != null) {
+                $this->db->where($key, $val);
+            }
         }
-        return false;
-    }
-	
-    function ambilqty() {
-        $today=date('Y-m-d', strtotime("yesterday"));
-        $this->db->select("sum(qty) as qty");
-        $this->db->from('sales_daily');
-        $this->db->where('sales_closedate', $today);
+        $rs = $this->db->get();
 
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->row()->qty;
-        }
-        return false;
-    }
-
-    function ambilamt() {
-        $today=date('Y-m-d', strtotime("yesterday"));
-        $this->db->select("sum(amt) as amt");
-        $this->db->from('sales_daily');
-        $this->db->where('sales_closedate', $today);
-
-        $query = $this->db->get();
-        if ($query->num_rows() > 0) {
-            return $query->row()->amt;
-        }
-        return false;
+        return $rs;
     }
 
 }
