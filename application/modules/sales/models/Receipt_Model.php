@@ -1,3 +1,6 @@
+<?php
+ini_set('memory_limit', '2048');
+?>
 <?php if (! defined('BASEPATH')) {exit('No direct script access allowed');}
 
 class Receipt_Model extends Core_Model {
