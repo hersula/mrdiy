@@ -35,7 +35,8 @@
  * @since	Version 1.0.0
  * @filesource
  */
-
+// memory no limit
+	// ini_set('memory_limit', '-1');
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -68,6 +69,7 @@ switch (ENVIRONMENT)
 {
 	case 'development':
 		error_reporting(-1);
+		ini_set('memory_limit', -1);
 		ini_set('display_errors', 1);
 	break;
 
