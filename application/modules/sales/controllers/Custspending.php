@@ -192,16 +192,20 @@ class Custspending extends Core_Controller {
 
 	function xls() {
 		# Judul laporan
-		$JudulLaporan = "Ticket List";
+		$JudulLaporan = "Customer Spending";
 		# Ambil data
 		$filter = array(
-			'a.active' => $this->input->post("active", TRUE),
+			'a.amt >' => $this->input->post("filter_start_amt", TRUE),
+			'a.amt <=' => $this->input->post("filter_end_amt", TRUE),
+			'a.sales_closedate >=' => $this->input->post("filter_start_date", true),
+            'a.sales_closedate <=' => $this->input->post("filter_end_date", true),
 		);
+		// $this->output->set_content_type('application/json');
 		$rs = $this->m_app->getDataList($filter);
 		# Deklarasi kolom yang akan ditampilkan
-		$Col['header'] = array('Karyawan Code', 'Karyawan Name',  'Status');
-		$Col['type'] = array('string', 'string', 'string');
-		$Col['align'] = array('left', 'left', 'center');
+		$Col['header'] = array('Region', 'Store Code', 'Store Name', 'Store Desc', 'Transaction', 'Sales');
+		$Col['type'] = array('string', 'string', 'string', 'string', 'numeric', 'numeric');
+		$Col['align'] = array('left', 'left', 'left', 'left', 'float-right', 'float-right');
 		# Load library
 		$this->load->library('XLSReport');
 		$xls = new XLSReport();

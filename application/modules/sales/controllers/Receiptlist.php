@@ -181,7 +181,7 @@ class Receiptlist extends Core_Controller {
 		$JudulLaporan = "Receipt List";
 		# Ambil data
 		$filter = array(
-			'a.sales_store' => $this->input->post("active", TRUE),
+			'a.sales_store' => $this->input->post("store", TRUE),
 			'a.sales_closedate >=' => $this->input->post("filter_start_date", true),
             'a.sales_closedate <=' => $this->input->post("filter_end_date", true),
 		);

@@ -8,6 +8,15 @@
             </ol>
         </div>
     </div>
+    <div class="col-md-6">
+      <div class="page-title-box text-right">
+         <div class="button-items">
+            <?php if ($priv_arr['xls_flag']) { ?>
+               <button type="button" class="btn btn-outline-success btn-sm waves-effect waves-light" id="app_xls" name="app_xls" onclick="app_xls();"><i class="fas fa-file-excel"></i> Excel/CSV </button>
+            <?php } ?>
+         </div>
+      </div>
+   </div>
 </div>
 <div class="row">
 <div class="col-md-12">
